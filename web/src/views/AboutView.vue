@@ -1,7 +1,7 @@
 <template>
-  <div class="about">
+  <main class="about view container grid">
     <h1>This is an about page</h1>
-  </div>
+  </main>
 </template>
 
 <style>

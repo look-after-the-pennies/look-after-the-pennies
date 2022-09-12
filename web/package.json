@@ -7,6 +7,22 @@
     "preview": "vite preview --port 4173",
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs --fix --ignore-path .gitignore"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/budget-banana/budget-banana.git"
+  },
+  "keywords": [
+    "Budgeting",
+    "Personal Finance",
+    "Finance",
+    "Money"
+  ],
+  "author": "iSCJT <sean@speckledbanana.com>",
+  "license": "AGPL-3.0",
+  "bugs": {
+    "url": "https://github.com/budget-banana/budget-banana/issues"
+  },
+  "homepage": "https://github.com/budget-banana/budget-banana#readme",
   "dependencies": {
     "vue": "^3.2.38",
     "vue-router": "^4.1.5"

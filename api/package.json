@@ -4,7 +4,6 @@
   "description": "API to support budget banana application",
   "main": "index.js",
   "scripts": {
-    "test": "test",
     "dev": "node index.js"
   },
   "repository": {

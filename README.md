@@ -19,27 +19,3 @@ btw Budget Banana is just a working title until I can think of something better,
 ## Contribute
 
 I'd love for other people to want to contribute and help out with this project.  If you want to talk I'm [@iSCJT on twitter](https://twitter.com/iSCJT) or you can email me at [sean@speckledbanana.com](mailto:sean@speckledbanana.com).
-
-## Project Setup
-
-```sh
-npm install
-```
-
-### Compile and Hot-Reload for Development
-
-```sh
-npm run dev
-```
-
-### Compile and Minify for Production
-
-```sh
-npm run build
-```
-
-### Lint with [ESLint](https://eslint.org/)
-
-```sh
-npm run lint
-```

@@ -6,23 +6,26 @@ const AuthRouter = Router();
 // === SIGNUP & LOGIN ====
 
 AuthRouter.post('/:action', async function (req, res) {
-	//console.log(req)
-	const reqBody =
-		req.params.action === 'signup' ? { ...req.body, signup: true } : req.body;
+  const action = req.params.action;
+  //console.log(req)
 
-	try {
-		const auth = new Auth();
-		//console.log(reqBody);
-		const userDetails = await auth.authenticate(reqBody);
-		//console.log(JSON.stringify(userDetails));
-		res.send(userDetails);
-	} catch (err: any) {
-		if (err.status) {
-			res.status(err.status).send(JSON.stringify(err));
-		} else {
-			res.status(500).send(JSON.stringify(err));
-		}
-	}
+  try {
+    const auth = new Auth();
+    //console.log(reqBody);
+
+    const userDetails = async () => {
+      if (action === 'login') return await auth.login(req.body);
+      if (action === 'signup') return await auth.signup(req.body);
+    };
+    //console.log(JSON.stringify(userDetails));
+    res.send(userDetails);
+  } catch (err: any) {
+    if (err.status) {
+      res.status(err.status).send(JSON.stringify(err));
+    } else {
+      res.status(500).send(JSON.stringify(err));
+    }
+  }
 });
 
 export default AuthRouter;

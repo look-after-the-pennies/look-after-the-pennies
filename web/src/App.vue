@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { RouterLink, RouterView } from 'vue-router';
 import TheHeader from './components/TheHeader.vue';
+import TheFooter from './components/TheFooter.vue';
 </script>
 
 <template>
@@ -8,6 +9,7 @@ import TheHeader from './components/TheHeader.vue';
   <div class="container mx-auto">
     <RouterView />
   </div>
+  <TheFooter />
 </template>
 
 <style scoped>

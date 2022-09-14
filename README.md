@@ -19,3 +19,17 @@ btw Budget Banana is just a working title until I can think of something better,
 ## Contribute
 
 I'd love for other people to want to contribute and help out with this project.  If you want to talk I'm [@iSCJT on twitter](https://twitter.com/iSCJT) or you can email me at [sean@speckledbanana.com](mailto:sean@speckledbanana.com).
+
+## Roadmap
+
+There's lots more in my head but these are the big ticket bits of functionality that will form the core of the application:
+
+- [ ] Landing page V1
+- [ ] Manual spend tracking
+- [ ] Landing page V2 with alpha signup
+- [ ] Recurring payments & balance forecasting
+- [ ] Transaction uploads (csv)
+- [ ] Monzo / Starling API integration
+- [ ] Open banking integration to fetch transactions [https://nordigen.com/en/account-information/](https://nordigen.com/en/account-information/)
+- [ ] Financial assistance / education services (CAB, Money Advice Line etc.)
+- [ ] Android & iOS apps

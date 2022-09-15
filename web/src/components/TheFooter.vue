@@ -46,20 +46,29 @@
 
 <style lang="scss" scoped>
 .avatar {
-  visibility: hidden;
-  opacity: 0;
-  position: absolute;
-  margin-top: -75px;
-  margin-left: 10px;
-}
-.iscjt:hover ~ img {
-  display: block;
+  // visibility: hidden;
+  // opacity: 0;
+  // display: none;
 
   border-radius: 50%;
   height: 50px;
   width: 50px;
-  visibility: visible;
-  opacity: 1;
-  transition: opacity 0.5s ease-in;
+  position: fixed;
+  right: -50px;
+  bottom: 0px;
+  transform: rotate(-20deg);
+  transition: right 1s, bottom 1s;
+}
+.iscjt:hover ~ img {
+  // display: block;
+
+  // visibility: visible;
+  // opacity: 1;
+  // transition: opacity 0.5s ease-in;
+  // opacity: 1;
+  bottom: 60px;
+  right: 0px;
+  // transform: rotate(-40deg);
+  // transition: translate 1s ease-in;
 }
 </style>

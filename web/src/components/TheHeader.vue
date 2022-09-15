@@ -7,7 +7,7 @@ const user = useUserStore();
 
 <template>
   <header
-    class="sticky w-full top-0 bg-slate-50 text-slate-600 border-b border-slate/900/10"
+    class="z-50 w-full bg-slate-50 text-slate-600 border-b border-slate/900/10"
   >
     <div class="container mx-auto grid grid-cols-12 justify-between">
       <div class="col-span-9 py-4">

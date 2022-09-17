@@ -2,14 +2,14 @@
 
 <template>
   <footer
-    class="w-full min-h-10 py-4 bg-slate-50 text-slate-600 border-y border-slate/900/10"
+    class="w-full min-h-10 py-4 bg-slate-50 text-slate-600 border-y border-slate/900/10 px-2 md:px-0"
   >
-    <div class="container mx-auto flex justify-between">
-      <div>
+    <div class="container mx-auto flex flex-row flex-wrap md:justify-between">
+      <div class="basis-full md:basis-3/5 text-center md:text-left text-sm">
         A
         <a
           href="https://speckledbanana.com"
-          class="bg-yellow-200 px-1 rounded-sm cursor-pointer font-semibold uppercase"
+          class="bg-yellow-200 px-1 rounded-sm cursor-pointer font-semibold tracking-tight uppercase"
           >Speckled Banana</a
         >
         project by
@@ -24,22 +24,22 @@
             class="avatar border"
           />
         </div>
-        |
+      </div>
+
+      <div
+        class="flex ml-auto text-sm leading-6 font-semibold space-x-4 basis-full md:basis-2/5 justify-center md:justify-end mt-2"
+      >
         <a
           href="https://twitter.com/hashtag/buildinpublic"
           class="hover:bg-yellow-200 cursor-pointer rounded-sm font-semibold transition duration-250 ease-in"
           >#buildinpublic</a
         >
-      </div>
-      <nav
-        class="relative hidden md:flex items-center ml-auto text-sm leading-6 font-semibold space-x-8"
-      >
         <a
           href="https://github.com/budget-banana/budget-banana"
           class="cursor-pointer hover:bg-yellow-200 transition duration-250 ease-in px-1 rounded-sm"
           >GitHub</a
         >
-      </nav>
+      </div>
     </div>
   </footer>
 </template>

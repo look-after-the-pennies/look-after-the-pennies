@@ -1,31 +1,15 @@
 <script setup lang="ts">
 import TheSubscribeForm from '../components/TheSubscribeForm.vue';
+import TheRoadMap from '../components/TheRoadMap.vue';
+import WantToHelp from '../components/WantToHelp.vue';
 </script>
 
 <template>
   <main class="grid grid-cols-12">
     <div
-      class="w-screen bg-gradient-to-b from-blue-100 to-white col-span-12 relative"
+      class="w-screen bg-gradient-to-b from-blue-100 to-white col-span-12 relative px-1 md:px-0"
     >
-      <div class="container py-32 mx-auto pt-20 sm:pt-24 lg:pt-32">
-        <div class="container absolute top-2">
-          <p
-            class="invisible md:visible text-md text-slate-600 rounded-2xl bg-yellow-200 w-100 text-center py-1 float-right"
-          >
-            Want to help?
-            <a
-              href="./contact-us"
-              class="cursor-pointer hover:bg-yellow-200 transition duration-250 ease-in rounded-sm font-semibold underline"
-              >Get in touch</a
-            >
-            or check out our
-            <a
-              href="https://github.com/budget-banana/budget-banana"
-              class="cursor-pointer hover:bg-yellow-200 transition duration-250 ease-in rounded-sm font-semibold underline"
-              >GitHub</a
-            >.
-          </p>
-        </div>
+      <div class="container mx-auto pt-16 pb-20 md:py-24 lg:py-32">
         <h1
           class="font-extrabold text-4xl sm:text-5xl lg:text-6xl tracking-tight text-center mb-10 max-w-6xl mx-auto"
         >
@@ -33,109 +17,29 @@ import TheSubscribeForm from '../components/TheSubscribeForm.vue';
           application.
         </h1>
         <p class="text-lg text-slate-600 mt-6 text-center max-w-3xl mx-auto">
-          We're building in public towards an alpha release, subscribe below for
-          updates and be the first to know when you can signup.
+          We're currently building (in public) towards a release, subscribe
+          below for updates and to be the first to know when signups are open.
         </p>
 
         <TheSubscribeForm />
       </div>
     </div>
-    <div class="col-span-9 py-4 mx-auto relative">Main body</div>
-    <div class="col-span-3 py-4 px-2 h-full text-sm mb-16">
-      <h3 class="text-xl pl-4 mb-2">Roadmap</h3>
-      <ul class="border-l border-gray-300">
-        <li class="pl-2 flex flex-start items-center pt-1">
-          <img
-            src="../assets/roadmap-dot-in-progress.png"
-            alt=""
-            width="12px"
-            height="12px"
-            class="-ml-3.65 mr-3"
-          />
-          Landing page V1
-        </li>
-        <li class="pl-2 flex flex-start items-center pt-3">
-          <img
-            src="../assets/roadmap-dot.png"
-            alt=""
-            width="12px"
-            height="12px"
-            class="-ml-3.65 mr-3"
-          />
-          Manual spend tracking
-        </li>
-        <li class="pl-2 flex flex-start items-center pt-3">
-          <img
-            src="../assets/roadmap-dot.png"
-            alt=""
-            width="12px"
-            height="12px"
-            class="-ml-3.65 mr-3"
-          />
-          Landing page V2 with alpha signup
-        </li>
-        <li class="pl-2 flex flex-start items-center pt-3">
-          <img
-            src="../assets/roadmap-dot.png"
-            alt=""
-            width="12px"
-            height="12px"
-            class="-ml-3.65 mr-3"
-          />
-          Recurring payments & balance forecasting
-        </li>
-        <li class="pl-2 flex flex-start items-center pt-3">
-          <img
-            src="../assets/roadmap-dot.png"
-            alt=""
-            width="12px"
-            height="12px"
-            class="-ml-3.65 mr-3"
-          />
-          Transaction uploads (csv)
-        </li>
-        <li class="pl-2 flex flex-start items-center pt-3">
-          <img
-            src="../assets/roadmap-dot.png"
-            alt=""
-            width="12px"
-            height="12px"
-            class="-ml-3.65 mr-3"
-          />
-          Monzo / Starling API integration
-        </li>
-        <li class="pl-2 flex flex-start items-center pt-3">
-          <img
-            src="../assets/roadmap-dot.png"
-            alt=""
-            width="12px"
-            height="12px"
-            class="-ml-3.65 mr-3"
-          />
-          Open banking integration to fetch transactions
-        </li>
-        <li class="pl-2 flex flex-start items-center pt-3">
-          <img
-            src="../assets/roadmap-dot.png"
-            alt=""
-            width="12px"
-            height="12px"
-            class="-ml-3.65 mr-3"
-          />
-          Financial assistance / education services (CAB, Money Advice Line
-          etc.)
-        </li>
-        <li class="pl-2 flex flex-start items-center pt-3">
-          <img
-            src="../assets/roadmap-dot.png"
-            alt=""
-            width="12px"
-            height="12px"
-            class="-ml-3.65 mr-3"
-          />
-          Android & iOS apps
-        </li>
-      </ul>
+    <div class="w-screen">
+      <hr class="hidden md:block" />
+      <div class="container mx-auto grid grid-cols-12 md:gap-8 md:pt-8">
+        <div class="col-span-12 md:col-span-9 mx-auto px-4 md:px-0">
+          <hr class="mb-8 md:hidden" />
+          <!-- TODO: write some copy -->
+          <h2 class="text-xl md:text-2xl mb-4">Why BudgetBanana</h2>
+          Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eius aut
+          ducimus doloribus eos velit exercitationem, delectus sunt numquam,
+          aspernatur quae quia! Repellendus perferendis commodi quibusdam atque
+          molestias distinctio, aut esse.
+        </div>
+
+        <TheRoadMap />
+        <!-- <WantToHelp class="visible min-w-screen md:min-w-0 mb-12" /> -->
+      </div>
     </div>
   </main>
 </template>

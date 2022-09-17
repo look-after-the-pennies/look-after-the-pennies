@@ -1,86 +1,46 @@
 <script setup lang="ts">
-import { ref } from 'vue';
-
-const email = ref('');
-const checkbox = ref(false);
-
-const joinMailingList = async () => {
-  const response = await fetch(
-    `https://maker.ifttt.com/trigger/budget_banana_mailing_list/with/key/bcjmJykxEbiGJ8MalYqI06?value1=${email.value}&value2=${checkbox.value}`,
-    { mode: 'no-cors' }
-  );
-  email.value = '';
-  checkbox.value = false;
-};
+import TheSubscribeForm from '../components/TheSubscribeForm.vue';
 </script>
 
 <template>
-  <main class="container mx-auto grid grid-cols-12">
-    <div class="col-span-12 py-32 mx-auto pt-20 sm:pt-24 lg:pt-32 relative">
-      <h1
-        class="font-extrabold text-4xl sm:text-5xl lg:text-6xl tracking-tight text-center"
-      >
-        An open source spend tracking, budgeting and financial planning
-        application.
-      </h1>
-    </div>
-    <div class="col-span-9 py-4 mx-auto relative">
-      <div class="grid grid-cols-12 w-full px-4">
-        <div class="col-span-6 px-8">
-          <h2 class="mb-4 text-xl">Get updates on progress.</h2>
-          <p class="mb-1">
-            I hate writing emails so these will be infrequent, I imagine one
-            every time something on the roadmap is completed.
-          </p>
-          <p>
-            Never going to try selling you anything or promoting another
-            product.
+  <main class="grid grid-cols-12">
+    <div
+      class="w-screen bg-gradient-to-b from-blue-100 to-white col-span-12 relative"
+    >
+      <div class="container py-32 mx-auto pt-20 sm:pt-24 lg:pt-32">
+        <div class="container absolute top-2">
+          <p
+            class="invisible md:visible text-md text-slate-600 rounded-2xl bg-yellow-200 w-100 text-center py-1 float-right"
+          >
+            Want to help?
+            <a
+              href="./contact-us"
+              class="cursor-pointer hover:bg-yellow-200 transition duration-250 ease-in rounded-sm font-semibold underline"
+              >Get in touch</a
+            >
+            or check out our
+            <a
+              href="https://github.com/budget-banana/budget-banana"
+              class="cursor-pointer hover:bg-yellow-200 transition duration-250 ease-in rounded-sm font-semibold underline"
+              >GitHub</a
+            >.
           </p>
         </div>
-        <!-- TODO: Error checking, confirmation of success etc -->
-        <form
-          @submit.prevent="joinMailingList()"
-          class="flex col-span-6 flex-col py-4 px-8 border border-1 rounded h-min"
+        <h1
+          class="font-extrabold text-4xl sm:text-5xl lg:text-6xl tracking-tight text-center mb-10 max-w-6xl mx-auto"
         >
-          <label
-            for="email"
-            class="rounded-l-lg text-sm text-slate-500"
-            >Email</label
-          >
-          <div class="flex flex-row border rounded-lg mb-2">
-            <input
-              type="email"
-              name="email"
-              id="email"
-              v-model="email"
-              required
-              class="py-1 px-2 w-full rounded-l-lg"
-            />
-            <button
-              type="submit"
-              class="bg-yellow-200 rounded-r-lg py-1 px-2 w-min text-sm disabled:bg-slate-100 disabled:cursor-not-allowed"
-              :disabled="!checkbox"
-            >
-              Subscribe
-            </button>
-          </div>
-          <div class="flex flex-row">
-            <input
-              type="checkbox"
-              name="checkbox"
-              id="checkbox"
-              v-model="checkbox"
-              required
-            />
-            <label
-              for="checkbox"
-              class="pl-2 text-sm"
-              >I'm happy for you to send me the occasional email</label
-            >
-          </div>
-        </form>
+          An open source spend tracking, budgeting and financial planning
+          application.
+        </h1>
+        <p class="text-lg text-slate-600 mt-6 text-center max-w-3xl mx-auto">
+          We're building in public towards an alpha release, subscribe below for
+          updates and be the first to know when you can signup.
+        </p>
+
+        <TheSubscribeForm />
       </div>
     </div>
+    <div class="col-span-9 py-4 mx-auto relative">Main body</div>
     <div class="col-span-3 py-4 px-2 h-full text-sm mb-16">
       <h3 class="text-xl pl-4 mb-2">Roadmap</h3>
       <ul class="border-l border-gray-300">

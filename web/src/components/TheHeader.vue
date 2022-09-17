@@ -13,13 +13,14 @@ const user = useUserStore();
       <div class="col-span-9 py-4">
         <router-link
           to="/"
-          class="header-logo text-3xl uppercase font-bold cursor-pointer"
+          class="header-logo text-3xl uppercase font-bold cursor-pointer z-50"
           tag="h1"
           >Budget Banana</router-link
         >
-        <!-- <span class="text-slate-400 italic text-xs absolute working-title"
+        <span
+          class="bg-yellow-200 italic text-xs absolute working-title -ml-16 mt-8"
           >Working title</span
-        > -->
+        >
       </div>
       <nav
         class="relative hidden md:flex items-center text-sm ml-auto leading-6 font-semibold space-x-8 col-span-3"
@@ -48,8 +49,8 @@ const user = useUserStore();
 </template>
 
 <style lang="scss" scoped>
-.working-title {
-  margin-left: -60px;
-  margin-top: 32px;
-}
+// .working-title {
+//   margin-left: -60px;
+//   margin-top: 32px;
+// }
 </style>

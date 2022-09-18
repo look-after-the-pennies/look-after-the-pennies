@@ -17,8 +17,12 @@ import WantToHelp from '../components/WantToHelp.vue';
           application.
         </h1>
         <p class="text-lg text-slate-700 mt-6 text-center max-w-3xl mx-auto">
-          We're currently building (in public) towards a release, subscribe
-          below for updates and to be the first to know when signups are open.
+          We're currently building (<router-link
+            to="/open-organisation"
+            class="cursor-pointer hover:bg-yellow-200 transition duration-250 ease-in rounded-sm font-semibold underline"
+            >in public</router-link
+          >) towards a release, subscribe below for updates and to be the first
+          to know when signups are open.
         </p>
 
         <TheSubscribeForm />
@@ -34,21 +38,21 @@ import WantToHelp from '../components/WantToHelp.vue';
           >
             Why BudgetBanana
           </h2>
-          <p class="mb-3 text-slate-700">
+          <p class="mb-4 md:mb-3 text-slate-700">
             We're entering a period in history that is going to be incredibly
-            hard financially for a lot of people. When money is tight you need
-            to have a strong understanding of where your money is, how it is
-            spent and when the next bill is due.
+            hard for a lot of people. When money is tight you need to have a
+            strong understanding of where your money is, how it is spent and
+            when the next bill is due.
           </p>
-          <p class="mb-3 text-slate-700">
-            Most existing budgeting / spend tracking services are aimed at
-            people who are already relatively well off financially. However, I
-            believe the people that can benefit most from these sort of services
-            are those that are living paycheck to paycheck. The apps themselves
-            are either very basic, tied to some kind of savings / investment
-            account or harvesting your data to sell to hedge funds.
+          <p class="mb-4 md:mb-3 text-slate-700">
+            I believe the people that can benefit most from budgeting and spend
+            tracking services are those that are living paycheck to paycheck.
+            However, most existing services are aimed at people who are already
+            relatively well off financially and the apps themselves are either
+            very basic, tied to some kind of savings / investment account or
+            harvesting your data to sell to hedge funds.
           </p>
-          <p class="mb-3 text-slate-700">
+          <p class="mb-4 md:mb-3 text-slate-700">
             BudgetBanana's applications will be open source, free of charge and
             fully featured. Users data will never be sold and they will not be
             advertised to and encouraged to spend more of their money on things
@@ -63,11 +67,15 @@ import WantToHelp from '../components/WantToHelp.vue';
             The Name Is Terrible
           </h2>
           <p class="mb-3 text-slate-700">
-            I know! It's very much a working title and I'd love to hear any
-            suggestions you have for a better name for the project. I've been
-            racking my brains for that elusive name that sounds friendly and
-            welcoming but also descriptive and encompasses what the project is
-            about.
+            I know! It's very much a working title and
+            <router-link
+              to="/contact-us"
+              class="cursor-pointer hover:bg-yellow-200 transition duration-250 ease-in rounded-sm font-semibold underline"
+              >I'd love to hear any suggestions</router-link
+            >
+            you have for a better name for the project. I've been racking my
+            brains for that elusive name that sounds friendly and welcoming but
+            also descriptive and encompasses what the project is about.
           </p>
           <h2
             class="text-slate-900 text-3xl tracking-tight font-extrabold sm:text-4xl mb-4 mt-8"
@@ -77,8 +85,12 @@ import WantToHelp from '../components/WantToHelp.vue';
           <p class="mb-3 text-slate-700">
             If you like the vision for BudgetBanana and would like to help with
             developing the applications, working on our branding, writing
-            content, marketing, social media or anything else I'd love to hear
-            from you. Many hands make light work and all that!
+            content, marketing, social media or anything else
+            <router-link
+              to="/contact-us"
+              class="cursor-pointer hover:bg-yellow-200 transition duration-250 ease-in rounded-sm font-semibold underline"
+              >I'd love to hear from you</router-link
+            >. Many hands make light work and all that!
           </p>
         </div>
 
@@ -89,9 +101,4 @@ import WantToHelp from '../components/WantToHelp.vue';
   </main>
 </template>
 
-<style lang="scss" scoped>
-.roadmap-dot {
-  width: 8px;
-  height: 8px;
-}
-</style>
+<style lang="scss" scoped></style>

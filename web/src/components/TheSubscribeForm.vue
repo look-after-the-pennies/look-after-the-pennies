@@ -25,24 +25,6 @@ const joinMailingList = async () => {
 
 <template>
   <div class="w-[calc(100%-2rem)] mx-auto mt-12 max-w-4xl md:max-w-2xl w-full">
-    <!-- <div class="col-span-4">
-      <ul>
-        <li>No spam</li>
-        <li>No sales</li>
-        <li>Just roadmap updates</li>
-      </ul>
-    </div> -->
-    <!--     <div class="col-span-6 px-8">
-          <h2 class="mb-4 text-xl">Get updates on progress.</h2>
-          <p class="mb-1">
-            I hate writing emails so these will be infrequent, I imagine one
-            every time something on the roadmap is completed.
-          </p>
-          <p>
-            Never going to try selling you anything or promoting another
-            product.
-          </p>
-        </div> -->
     <!-- TODO: Error checking, confirmation of success etc -->
     <form
       @submit.prevent="joinMailingList()"
@@ -63,18 +45,17 @@ const joinMailingList = async () => {
           id="email"
           v-model="email"
           required
-          class="py-2 md:py-4 px-2 w-full rounded-l-xl text-xs md:text-md"
+          class="py-2 md:py-4 px-2 w-full rounded-l-xl text-xs md:text-lg"
           placeholder="Email"
         />
         <button
           type="submit"
-          class="bg-yellow-200 rounded-r-xl py-2 md:py-4 px-2 md:px-4 w-content text-xs md:text-md disabled:bg-slate-100 disabled:cursor-not-allowed transition-colors"
+          class="bg-yellow-200 rounded-r-xl py-2 md:py-4 px-2 md:px-4 w-content text-xs md:text-lg disabled:bg-slate-100 disabled:cursor-not-allowed transition-colors"
           :disabled="!optIn"
         >
           {{ subscribeButtonText }}
         </button>
       </div>
-      <!-- TODO: iPhone scaling text much larger -->
       <div
         class="opt-in-container bg-gradient-to-b from-blue-50 to-blue-100 rounded-xl max-w-[calc(100%-2.5rem)] md:max-w-2xl text-xs md:text-sm"
       >
@@ -105,7 +86,6 @@ const joinMailingList = async () => {
             <span class="md:hidden ml-7 pl-0.5 mr-1">
               Zero spam, zero sales.</span
             >
-            <!-- TODO: Create privacy policy -->
             <router-link
               to="/privacy-policy"
               class="cursor-pointer hover:bg-yellow-200 transition duration-250 ease-in rounded-sm underline mr-7 md:mr-1 text-right md:px-1"

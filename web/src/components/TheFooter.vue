@@ -16,6 +16,7 @@
         <div class="inline-block">
           <a
             href="https://twitter.com/iSCJT"
+            title="@iSCJT on Twitter"
             class="iscjt hover:bg-yellow-200 cursor-pointer rounded-sm font-semibold transition duration-250 ease-in"
             >@iSCJT
           </a>
@@ -27,7 +28,7 @@
       </div>
 
       <div
-        class="flex ml-auto text-sm leading-6 font-semibold space-x-4 basis-full md:basis-2/5 justify-center md:justify-end mt-2"
+        class="flex ml-auto text-sm leading-6 font-semibold space-x-4 basis-full md:basis-2/5 justify-center md:justify-end mt-2 md:mt-0"
       >
         <a
           href="https://twitter.com/hashtag/buildinpublic"

@@ -5,14 +5,16 @@ import WantToHelp from '../components/WantToHelp.vue';
 <template>
   <div class="col-span-12 md:col-span-3 mb-6">
     <hr class="my-8 md:hidden" />
-    <h2 class="text-xl md:text-2xl md:pl-4 mb-4 md:mb-0 px-4 md:px-0">
+    <h2
+      class="text-slate-900 text-3xl tracking-tight font-extrabold md:text-2xl md:pl-4 mb-4 md:mb-0 px-4 md:px-0"
+    >
       Roadmap
     </h2>
     <div class="md:py-4 px-6 md:px-2 text-sm mx-auto md:mx-0 mb-6">
       <ul class="border-l border-gray-300">
         <li class="pl-2 flex flex-start items-center pt-1">
           <img
-            src="../assets/roadmap-dot-in-progress.png"
+            src="../assets/roadmap-dot-complete.png"
             alt=""
             width="12px"
             height="12px"
@@ -22,7 +24,7 @@ import WantToHelp from '../components/WantToHelp.vue';
         </li>
         <li class="pl-2 flex flex-start items-center pt-3">
           <img
-            src="../assets/roadmap-dot.png"
+            src="../assets/roadmap-dot-in-progress.png"
             alt=""
             width="12px"
             height="12px"

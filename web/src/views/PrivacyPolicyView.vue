@@ -1,6 +1,6 @@
 <template>
   <main
-    class="container mx-auto text-slate-700 pt-6"
+    class="container mx-auto text-slate-700 pt-6 px-2 md:px-0"
     id="content"
   >
     <section>
@@ -36,7 +36,7 @@
         website:
       </p>
 
-      <ul class="mb-3">
+      <ul class="mb-3 list-disc list-inside">
         <li>No personal information is collected</li>
         <li>No information such as cookies is stored in the browser</li>
         <li>No information is shared with, sent to or sold to third-parties</li>

@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import { ref, computed } from 'vue';
+import { ref } from 'vue';
+import 'vue-router';
 
 const email = ref('');
 const subscribeButtonText = ref('Subscribe');
@@ -105,10 +106,10 @@ const joinMailingList = async () => {
               Zero spam, zero sales.</span
             >
             <!-- TODO: Create privacy policy -->
-            <a
-              href="./privacy-policy"
+            <router-link
+              to="/privacy-policy"
               class="cursor-pointer hover:bg-yellow-200 transition duration-250 ease-in rounded-sm underline mr-7 md:mr-1 text-right md:px-1"
-              >Privacy Policy</a
+              >Privacy Policy</router-link
             >
           </div>
         </div>

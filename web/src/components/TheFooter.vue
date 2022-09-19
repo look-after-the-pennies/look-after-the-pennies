@@ -5,7 +5,14 @@
     class="w-full min-h-10 py-4 bg-slate-50 text-slate-600 border-y border-slate/900/10 px-2 md:px-0 mt-16"
   >
     <div class="container mx-auto flex flex-row flex-wrap md:justify-between">
-      <div class="basis-full md:basis-3/5 text-center md:text-left text-sm">
+      <a
+        href="mailto:lets@lookafterthepennies.com"
+        class="md:hidden cursor-pointer hover:bg-yellow-200 transition duration-250 ease-in px-1 rounded-sm font-semibold mx-auto text-sm leading-6 mb-2"
+        >lets@lookafterthepennies.com</a
+      >
+      <div
+        class="basis-full md:basis-3/5 text-center md:text-left text-sm md:min-w-2/6 md:max-w-2/6"
+      >
         A
         <a
           href="https://speckledbanana.com"
@@ -26,17 +33,22 @@
           />
         </div>
       </div>
+      <a
+        href="mailto:lets@lookafterthepennies.com"
+        class="hidden md:inline-block cursor-pointer md:min-w-2/6 md:max-w-2/6 text-center hover:bg-yellow-200 transition duration-250 ease-in px-1 rounded-sm font-semibold text-sm leading-6 mb-2"
+        >lets@lookafterthepennies.com</a
+      >
 
       <div
-        class="flex ml-auto text-sm leading-6 font-semibold space-x-4 basis-full md:basis-2/5 justify-center md:justify-end mt-2 md:mt-0"
+        class="flex ml-auto text-sm leading-6 font-semibold space-x-4 basis-full md:basis-2/5 md:min-w-2/6 md:max-w-2/6 justify-center md:justify-end mt-2 md:mt-0"
       >
         <a
-          href="https://twitter.com/hashtag/buildinpublic"
+          href="https://twitter.com/PenniesHQ"
           class="hover:bg-yellow-200 cursor-pointer rounded-sm font-semibold transition duration-250 ease-in"
           >#buildinpublic</a
         >
         <a
-          href="https://github.com/budget-banana/budget-banana"
+          href="https://github.com/look-after-the-pennies/look-after-the-pennies"
           class="cursor-pointer hover:bg-yellow-200 transition duration-250 ease-in px-1 rounded-sm"
           >GitHub</a
         >

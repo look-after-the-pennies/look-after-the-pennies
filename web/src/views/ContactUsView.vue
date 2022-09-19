@@ -6,23 +6,31 @@
       Contact Details
     </h1>
     <ul>
-      <li>
+      <li class="mb-2">
         <a
-          href="mailto:hello@budgetbanana.com"
+          href="https://twitter.com/PenniesHQ"
+          title="@PenniesHQ on Twitter"
           class="hover:bg-yellow-200 cursor-pointer rounded-sm font-semibold transition duration-250 ease-in"
-          >hello@budgetbanana.com</a
         >
-      </li>
-      <li>
+          @PenniesHQ
+        </a>
+        /
         <a
           href="https://twitter.com/iSCJT"
           title="@iSCJT on Twitter"
           class="hover:bg-yellow-200 cursor-pointer rounded-sm font-semibold transition duration-250 ease-in"
         >
-          Twitter @iSCJT
+          @iSCJT
         </a>
       </li>
-      <li>
+      <li class="mb-2">
+        <a
+          href="mailto:lets@lookafterthepennies.com"
+          class="hover:bg-yellow-200 cursor-pointer rounded-sm font-semibold transition duration-250 ease-in"
+          >lets@lookafterthepennies.com</a
+        >
+      </li>
+      <li class="mb-2">
         <a
           href="www.linkedin.com/in/sean-thompson-uk"
           title="View LinkedIn profile"

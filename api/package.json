@@ -1,7 +1,7 @@
 {
-  "name": "budget-banana-api",
+  "name": "look-after-the-pennies-api",
   "version": "0.0.1",
-  "description": "API to support budget banana application",
+  "description": "API for Look After The Pennies",
   "main": "index.js",
   "scripts": {
     "dev": "nodemon",
@@ -10,7 +10,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/budget-banana/budget-banana.git"
+    "url": "git+https://github.com/look-after-the-pennies/look-after-the-pennies.git"
   },
   "keywords": [
     "Budgeting",
@@ -21,9 +21,9 @@
   "author": "iSCJT <sean@speckledbanana.com>",
   "license": "AGPL-3.0",
   "bugs": {
-    "url": "https://github.com/budget-banana/budget-banana/issues"
+    "url": "https://github.com/look-after-the-pennies/look-after-the-pennies/issues"
   },
-  "homepage": "https://github.com/budget-banana/budget-banana#readme",
+  "homepage": "https://lookafterthepennies.com",
   "dependencies": {
     "@supabase/supabase-js": "^2.0.0-rc.10",
     "axios": "^0.27.2",

@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import TheSubscribeForm from '../components/TheSubscribeForm.vue';
 import TheRoadMap from '../components/TheRoadMap.vue';
-import WantToHelp from '../components/WantToHelp.vue';
 </script>
 
 <template>
@@ -11,10 +10,13 @@ import WantToHelp from '../components/WantToHelp.vue';
     >
       <div class="container mx-auto pt-16 pb-20 md:py-24 lg:py-32">
         <h1
-          class="font-extrabold text-4xl sm:text-5xl lg:text-6xl tracking-tight text-center mb-10 max-w-6xl mx-auto"
+          class="font-extrabold text-4xl md:text-5xl lg:text-6xl tracking-tight text-center mb-10 max-w-6xl mx-auto"
         >
           An open source spend tracking, budgeting and financial planning
-          application.
+          application<span
+            class="text-4xl md:text-5xl lg:text-6xl text-yellow-300 ml-0.25"
+            >.</span
+          >
         </h1>
         <p class="text-lg text-slate-700 mt-6 text-center max-w-3xl mx-auto">
           We're currently building (<router-link
@@ -31,12 +33,15 @@ import WantToHelp from '../components/WantToHelp.vue';
     <div class="w-screen">
       <hr class="hidden md:block" />
       <div class="container mx-auto grid grid-cols-12 md:gap-8 md:pt-8">
-        <div class="col-span-12 md:col-span-9 mx-auto px-4 md:px-0">
+        <div class="col-span-12 md:col-span-9 mx-auto px-4 md:px-0 md:pr-6">
           <hr class="mb-8 md:hidden" />
           <h2
-            class="text-slate-900 text-3xl tracking-tight font-extrabold sm:text-4xl mb-4"
+            class="text-slate-900 text-3xl md: text-4xl tracking-tight font-extrabold mb-4"
           >
-            Why BudgetBanana
+            Why Look After The Pennies<span
+              class="text-4xl text-yellow-300 ml-0.25"
+              >.</span
+            >
           </h2>
           <p class="mb-4 md:mb-3 text-slate-700">
             We're entering a period in history that is going to be incredibly
@@ -53,39 +58,24 @@ import WantToHelp from '../components/WantToHelp.vue';
             harvesting your data to sell to hedge funds.
           </p>
           <p class="mb-4 md:mb-3 text-slate-700">
-            BudgetBanana's applications will be open source, free of charge and
-            fully featured. Users data will never be sold and they will not be
+            Our applications will be open source, free of charge and fully
+            featured. Users data will never be sold and they will not be
             advertised to and encouraged to spend more of their money on things
             they don't need. We will also seek to educate people about their
             finances and direct them to services and advice appropriate for
             their situation.
           </p>
-
           <h2
-            class="text-slate-900 text-3xl tracking-tight font-extrabold sm:text-4xl mb-4 mt-8"
+            class="text-slate-900 text-3xl md: text-4xl tracking-tight font-extrabold mb-4 mt-8"
           >
-            The Name Is Terrible
-          </h2>
-          <p class="mb-3 text-slate-700">
-            I know! It's very much a working title and
-            <router-link
-              to="/contact-us"
-              class="cursor-pointer hover:bg-yellow-200 transition duration-250 ease-in rounded-sm font-semibold underline"
-              >I'd love to hear any suggestions</router-link
+            Help Us On Our Mission<span class="text-4xl text-yellow-300 ml-0.25"
+              >.</span
             >
-            you have for a better name for the project. I've been racking my
-            brains for that elusive name that sounds friendly and welcoming but
-            also descriptive and encompasses what the project is about.
-          </p>
-          <h2
-            class="text-slate-900 text-3xl tracking-tight font-extrabold sm:text-4xl mb-4 mt-8"
-          >
-            Help Us On Our Mission
           </h2>
           <p class="mb-3 text-slate-700">
-            If you like the vision for BudgetBanana and would like to help with
-            developing the applications, working on our branding, writing
-            content, marketing, social media or anything else
+            If you like what I'm trying to do and want to help with developing
+            the applications, working on our branding, writing content,
+            marketing, social media or anything else
             <router-link
               to="/contact-us"
               class="cursor-pointer hover:bg-yellow-200 transition duration-250 ease-in rounded-sm font-semibold underline"

@@ -1,6 +1,6 @@
 {
-  "name": "budget-banana",
-  "version": "0.0.0",
+  "name": "look-after-the-pennies",
+  "version": "0.0.1",
   "scripts": {
     "dev": "vite",
     "build": "run-p type-check build-only",
@@ -11,7 +11,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/budget-banana/budget-banana.git"
+    "url": "git+https://github.com/look-after-the-pennies/look-after-the-pennies.git"
   },
   "keywords": [
     "Budgeting",
@@ -22,9 +22,9 @@
   "author": "iSCJT <sean@speckledbanana.com>",
   "license": "AGPL-3.0",
   "bugs": {
-    "url": "https://github.com/budget-banana/budget-banana/issues"
+    "url": "https://github.com/look-after-the-pennies/look-after-the-pennies/issues"
   },
-  "homepage": "https://github.com/budget-banana/budget-banana#readme",
+  "homepage": "https://lookafterthepennies.com",
   "dependencies": {
     "axios": "^0.27.2",
     "pinia": "^2.0.22",

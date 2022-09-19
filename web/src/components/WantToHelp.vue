@@ -11,7 +11,7 @@
       >
       or check out our
       <a
-        href="https://github.com/budget-banana/budget-banana"
+        href="https://github.com/look-after-the-pennies/look-after-the-pennies"
         class="cursor-pointer hover:bg-yellow-200 transition duration-250 ease-in rounded-sm font-semibold underline"
         >GitHub</a
       >.

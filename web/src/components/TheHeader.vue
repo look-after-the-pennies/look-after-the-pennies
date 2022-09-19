@@ -14,17 +14,19 @@ const user = useUserStore();
       <div class="py-4">
         <router-link
           to="/"
-          class="header-logo text-3xl tracking-tight font-bold cursor-pointer z-50"
+          class="header-logo text-xl tracking-tight font-bold cursor-pointer z-50"
           tag="h1"
-          >BudgetBanana</router-link
+          >Look After The Pennies<span class="text-2xl text-yellow-300 ml-0.25"
+            >.</span
+          ></router-link
         >
-        <span
+        <!-- <span
           class="bg-yellow-200 italic text-xs absolute working-title -ml-16 mt-8"
           >A working title</span
-        >
+        > -->
       </div>
       <div class="flex items-center">
-        <WantToHelp class="invisible md:visible" />
+        <WantToHelp class="hidden md:block" />
         <nav
           class="relative hidden md:flex items-center text-sm ml-auto leading-6 font-semibold space-x-8"
         >

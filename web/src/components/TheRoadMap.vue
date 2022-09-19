@@ -6,9 +6,9 @@ import WantToHelp from '../components/WantToHelp.vue';
   <div class="col-span-12 md:col-span-3 mb-6">
     <hr class="my-8 md:hidden" />
     <h2
-      class="text-slate-900 text-3xl tracking-tight font-extrabold md:text-2xl md:pl-4 mb-4 md:mb-0 px-4 md:px-0"
+      class="text-slate-900 text-3xl md:text-4xl tracking-tight font-extrabold md:pl-4 mb-4 md:mb-0 px-4 md:px-0"
     >
-      Roadmap
+      Roadmap<span class="text-4xl text-yellow-300 ml-0.25">.</span>
     </h2>
     <div class="md:py-4 px-6 md:px-2 text-sm mx-auto md:mx-0 mb-6">
       <ul class="border-l border-gray-300">

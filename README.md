@@ -1,4 +1,4 @@
-# Budget Banana
+# Look After The Pennies
 
 This app is a bit of an experiment for me, I tend to over-engineer my side-projects and run out of enthusiasm or time before ever getting them to a point that I'm happy to make them public.  This on the other hand I'll be building in public and I'm going to do it as quick and dirty as I can.
 
@@ -14,8 +14,6 @@ Most budgeting apps are either very basic, tied to some kind of mechanism for sa
 - Guide people towards services that may be able to help them if they are in financial difficulties.
 - and a lot more, I'll flesh this README out another day.
 
-btw Budget Banana is just a working title until I can think of something better, inspired by my freelance company name [Speckled Banana](https://speckledbanana.com)
-
 ## Contribute
 
 I'd love for other people to want to contribute and help out with this project.  If you want to talk I'm [@iSCJT on twitter](https://twitter.com/iSCJT) or you can email me at [sean@speckledbanana.com](mailto:sean@speckledbanana.com).
@@ -24,7 +22,7 @@ I'd love for other people to want to contribute and help out with this project. 
 
 There's lots more in my head but these are the big ticket bits of functionality that will form the core of the application:
 
-- [ ] Landing page V1
+- [X] Landing page V1
 - [ ] Manual spend tracking
 - [ ] Landing page V2 with alpha signup
 - [ ] Recurring payments & balance forecasting

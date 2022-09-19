@@ -1,6 +1,6 @@
 # Look After The Pennies
 
-This app is a bit of an experiment for me, I tend to over-engineer my side-projects and run out of enthusiasm or time before ever getting them to a point that I'm happy to make them public.  This on the other hand I'll be building in public and I'm going to do it as quick and dirty as I can.
+This app is a bit of an experiment for me, I tend to over-engineer my side-projects and run out of enthusiasm or time before ever getting them to a point that I'm happy to make them public.  This on the other hand I'll be building in public and I'm going to get to an MVP as quick and dirty as I can (whilst making sure user data is kept completely safe).
 
 For the last 20 years I have kept a personal 'budget' spreadsheet, at times when I've needed to be more on top of my finances it's proved invaluable for making sure that I will have the money I need, in the account it needs to be in, at the time it needs to be there.  I've tried a number of budgeting apps over the years and none of them have been able to beat my spreadsheet for the ease of use and most importantly forward looking visibility of my finances that it provides.  For at least a decade I've been meaning to build an app to replace my spreadsheet and now I'm finally getting around to it.
 

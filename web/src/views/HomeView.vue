@@ -8,7 +8,7 @@ import TheRoadMap from '../components/TheRoadMap.vue';
     <div
       class="w-screen bg-gradient-to-b from-blue-100 to-white col-span-12 relative px-1 md:px-0"
     >
-      <div class="container mx-auto pt-16 pb-20 md:py-24 lg:py-32">
+      <div class="container mx-auto pt-16 pb-20 md:py-20 lg:py-32">
         <h1
           class="font-extrabold text-4xl md:text-5xl lg:text-6xl tracking-tight text-center mb-10 max-w-6xl mx-auto"
         >
@@ -36,7 +36,7 @@ import TheRoadMap from '../components/TheRoadMap.vue';
         <div class="col-span-12 md:col-span-9 mx-auto px-4 md:px-0 md:pr-6">
           <hr class="mb-8 md:hidden" />
           <h2
-            class="text-slate-900 text-3xl md: text-4xl tracking-tight font-extrabold mb-4"
+            class="text-slate-900 text-3xl md:text-4xl tracking-tight font-extrabold mb-4"
           >
             Why Look After The Pennies<span
               class="text-4xl text-yellow-300 ml-0.25"
@@ -66,7 +66,7 @@ import TheRoadMap from '../components/TheRoadMap.vue';
             their situation.
           </p>
           <h2
-            class="text-slate-900 text-3xl md: text-4xl tracking-tight font-extrabold mb-4 mt-8"
+            class="text-slate-900 text-3xl md:text-4xl tracking-tight font-extrabold mb-4 mt-8"
           >
             Help Us On Our Mission<span class="text-4xl text-yellow-300 ml-0.25"
               >.</span

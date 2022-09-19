@@ -28,7 +28,7 @@ const joinMailingList = async () => {
     <!-- TODO: Error checking, confirmation of success etc -->
     <form
       @submit.prevent="joinMailingList()"
-      class="flex flex-col subscribe-form mb-4"
+      class="flex flex-col subscribe-form"
     >
       <label
         for="email"
@@ -69,7 +69,7 @@ const joinMailingList = async () => {
               id="opt-in"
               v-model="optIn"
               required
-              class="ml-2 align-center h-5"
+              class="ml-2 align-center mt-0.5"
             />
             <label
               for="opt-in"

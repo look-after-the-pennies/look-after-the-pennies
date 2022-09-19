@@ -2,7 +2,7 @@
 
 <template>
   <footer
-    class="w-full min-h-10 py-4 bg-slate-50 text-slate-600 border-y border-slate/900/10 px-2 md:px-0 mt-16"
+    class="w-full min-h-10 py-4 bg-slate-50 text-slate-600 border-y border-slate/900/10 px-2 md:px-0 mt-16 md:mt-24"
   >
     <div class="container mx-auto flex flex-row flex-wrap md:justify-between">
       <a

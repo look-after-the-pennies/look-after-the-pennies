@@ -15,7 +15,7 @@ const router = createRouter({
       // route level code-splitting
       // this generates a separate chunk (About.[hash].js) for this route
       // which is lazy-loaded when the route is visited.
-      component: () => import('../views/ContactUsView.vue'),
+      component: () => import('../pages/ContactUs.vue'),
     },
     {
       path: '/open-organisation',
@@ -23,26 +23,26 @@ const router = createRouter({
       // route level code-splitting
       // this generates a separate chunk (About.[hash].js) for this route
       // which is lazy-loaded when the route is visited.
-      component: () => import('../views/OpenOrganisationView.vue'),
+      component: () => import('../pages/OpenOrganisation.vue'),
     },
-    {
-      path: '/about',
-      name: 'about',
-      // route level code-splitting
-      // this generates a separate chunk (About.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
-      component: () => import('../views/AboutView.vue'),
-    },
-    {
-      path: '/login',
-      name: 'login',
-      component: () => import('../views/LoginView.vue'),
-    },
+    // {
+    //   path: '/about',
+    //   name: 'about',
+    //   // route level code-splitting
+    //   // this generates a separate chunk (About.[hash].js) for this route
+    //   // which is lazy-loaded when the route is visited.
+    //   component: () => import('../pages/About.vue'),
+    // },
+    // {
+    //   path: '/login',
+    //   name: 'login',
+    //   component: () => import('../pages/Login.vue'),
+    // },
 
     {
       path: '/privacy-policy',
       name: 'privacy-policy',
-      component: () => import('../views/PrivacyPolicyView.vue'),
+      component: () => import('../pages/PrivacyPolicy.vue'),
     },
   ],
 });

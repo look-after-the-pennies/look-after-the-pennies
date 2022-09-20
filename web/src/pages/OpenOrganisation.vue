@@ -47,7 +47,7 @@
                 class="flex flex-col basis-6/12 border border-slate-600 bg-blue-100 p-2 text-center rounded-md max-w-30"
               >
                 <h4>Commits</h4>
-                <span class="text-xl font-bold">22</span>
+                <span class="text-xl font-bold">23</span>
               </div>
             </div>
           </div>
@@ -97,8 +97,8 @@
           scrolling="no"
           frameborder="0"
           loading="lazy"
-          style="width: 1px; height: 1600px"
-          class="min-w-full md:min-w-4/5 xl:min-w-3/5"
+          style="width: 1px; height: 1800px"
+          class="min-w-full md:min-w-4/5"
         ></iframe>
         <div
           style="font-size: 14px; padding-bottom: 14px"

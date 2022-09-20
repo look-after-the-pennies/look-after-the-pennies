@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import WantToHelp from '../components/WantToHelp.vue';
-import { useUserStore } from '../stores/user';
+// import { useUserStore } from '../stores/user';
 import 'vue-router';
 
-const user = useUserStore();
+// const user = useUserStore();
 </script>
 
 <template>

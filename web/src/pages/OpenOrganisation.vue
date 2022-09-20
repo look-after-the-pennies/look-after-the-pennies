@@ -18,9 +18,14 @@
           What Does That Mean?
         </h2>
         <p class="mb-2">
-          It means that along the journey we will post regular updates about our
-          progress in a very open way, sharing our successes but also our
-          failures.
+          It means that along the journey
+          <a
+            ref="https://twitter.com/PenniesHQ"
+            class="hover:bg-yellow-200 cursor-pointer rounded-sm font-semibold transition duration-250 ease-in underline"
+            >we will post regular updates</a
+          >
+          about our progress in a very open way, sharing our successes but also
+          our failures.
         </p>
         <p class="mb-2">
           What it doesn't mean is that your data will be shared openly or
@@ -47,7 +52,7 @@
                 class="flex flex-col basis-6/12 border border-slate-600 bg-blue-100 p-2 text-center rounded-md max-w-30"
               >
                 <h4>Commits</h4>
-                <span class="text-xl font-bold">23</span>
+                <span class="text-xl font-bold">24</span>
               </div>
             </div>
           </div>

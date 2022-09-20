@@ -1,4 +1,6 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import 'vue-router';
+</script>
 
 <template>
   <footer
@@ -42,10 +44,10 @@
       <div
         class="flex ml-auto text-sm leading-6 font-semibold space-x-4 basis-full md:basis-2/5 md:min-w-2/6 md:max-w-2/6 justify-center md:justify-end mt-2 md:mt-0"
       >
-        <a
-          href="https://twitter.com/PenniesHQ"
+        <router-link
+          to="/open-organisation"
           class="hover:bg-yellow-200 cursor-pointer rounded-sm font-semibold transition duration-250 ease-in"
-          >#buildinpublic</a
+          >#buildinpublic</router-link
         >
         <a
           href="https://github.com/look-after-the-pennies/look-after-the-pennies"

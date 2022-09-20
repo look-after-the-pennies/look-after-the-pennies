@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import TheSubscribeForm from '../components/TheSubscribeForm.vue';
 import TheRoadMap from '../components/TheRoadMap.vue';
+import 'vue-router';
 </script>
 
 <template>
@@ -18,14 +19,14 @@ import TheRoadMap from '../components/TheRoadMap.vue';
             >.</span
           >
         </h1>
-        <!-- <p class="text-lg text-slate-700 mt-6 text-center max-w-3xl mx-auto">
+        <p class="text-lg text-slate-700 mt-6 text-center max-w-3xl mx-auto">
           We're currently building (<router-link
             to="/open-organisation"
             class="cursor-pointer hover:bg-yellow-200 transition duration-250 ease-in rounded-sm font-semibold underline"
             >in public</router-link
           >) towards a release, subscribe below for updates and to be the first
           to know when signups are open.
-        </p> -->
+        </p>
 
         <TheSubscribeForm />
       </div>
@@ -76,11 +77,11 @@ import TheRoadMap from '../components/TheRoadMap.vue';
             If you like what I'm trying to do and want to help with developing
             the applications, working on our branding, writing content,
             marketing, social media or anything else
-            <!-- <router-link
+            <router-link
               to="/contact-us"
               class="cursor-pointer hover:bg-yellow-200 transition duration-250 ease-in rounded-sm font-semibold underline"
               >I'd love to hear from you</router-link
-            >. Many hands make light work and all that! -->
+            >. Many hands make light work and all that!
           </p>
         </div>
 

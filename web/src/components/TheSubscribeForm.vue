@@ -1,6 +1,11 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 import 'vue-router';
+import Plausible from 'plausible-tracker';
+const { trackEvent } = Plausible({
+  domain: 'lookafterthepennies.com',
+  apiHost: 'https://lookafterthepennies.com/stats',
+});
 
 const email = ref('');
 const subscribeButtonText = ref('Subscribe');
@@ -12,6 +17,8 @@ const joinMailingList = async () => {
     `https://maker.ifttt.com/trigger/budget_banana_mailing_list/with/key/bcjmJykxEbiGJ8MalYqI06?value1=${email.value}&value2=${optIn.value}`,
     { mode: 'no-cors' }
   );
+  trackEvent('Mailing List: Subscriber');
+
   email.value = '';
   optIn.value = false;
   subscribeSuccess.value = true;

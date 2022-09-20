@@ -52,7 +52,7 @@
                 class="flex flex-col basis-6/12 border border-slate-600 bg-blue-100 p-2 text-center rounded-md max-w-30"
               >
                 <h4>Commits</h4>
-                <span class="text-xl font-bold">24</span>
+                <span class="text-xl font-bold">25</span>
               </div>
             </div>
           </div>

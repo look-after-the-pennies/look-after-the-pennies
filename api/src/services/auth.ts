@@ -6,10 +6,12 @@ export default class Auth {
     // const payload = req.email
     //   ? { email: req.email, password: req.password }
     //   : { refreshToken: req.refreshToken };
+    console.log(userDetails);
 
     const { data, error } = await Database.auth.signInWithPassword(userDetails);
     if (error) {
-      console.log(error);
+      console.log(JSON.stringify(error));
+      console.log('error in auth service');
       throw error;
     }
     return data;

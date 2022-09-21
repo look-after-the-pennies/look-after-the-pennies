@@ -7,23 +7,25 @@ const AuthRouter = Router();
 
 AuthRouter.post('/:action', async function (req, res) {
   const action = req.params.action;
-  //console.log(req)
+  console.log(action);
+  console.log(req.body);
+  const auth = new Auth();
 
   try {
-    const auth = new Auth();
-    //console.log(reqBody);
-
-    const userDetails = async () => {
-      if (action === 'login') return await auth.login(req.body);
-      if (action === 'signup') return await auth.signup(req.body);
-    };
-    //console.log(JSON.stringify(userDetails));
-    res.send(userDetails);
+    let userDetails;
+    if (action === 'login') userDetails = await auth.login(req.body);
+    else if (action === 'signup') userDetails = await auth.signup(req.body);
+    else res.status(403).send('Invalid endpoint');
   } catch (err: any) {
+    console.log(err.message);
+    console.log(err.status);
+
+    console.log(err);
     if (err.status) {
-      res.status(err.status).send(JSON.stringify(err));
+      res.status(err.status).send(err.message);
     } else {
-      res.status(500).send(JSON.stringify(err));
+      console.log('hitting 500 error');
+      res.status(500).send('Server error');
     }
   }
 });

@@ -1,1 +1,12 @@
 // app global css in SCSS form
+// @import './styles.scss';
+
+.container {
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+h1 {
+  font-size: xx-large;
+  line-height: normal;
+}

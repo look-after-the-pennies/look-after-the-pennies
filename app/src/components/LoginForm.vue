@@ -1,6 +1,11 @@
 <script setup lang="ts">
 import { ref } from 'vue';
-import { useUserStore } from 'stores/user';
+import { useRoute, useRouter } from 'vue-router';
+import { login, signup } from '../services/auth';
+import type { AuthResponse } from '../../types';
+
+const route = useRoute();
+const router = useRouter();
 
 const password = ref('test');
 const localRememberMe = localStorage.getItem('remember-me');
@@ -15,32 +20,36 @@ const rememberMe = ref(
   localRememberMeParsed ? localRememberMeParsed.remember_me : false
 );
 const isPwd = ref(true);
-const signup = ref(false);
+const signupPage = ref(route.path === '/signup' ? true : false);
 const status = ref({ error: '', loading: false });
-const store = useUserStore();
 
-const login = async () => {
+const processAuth = async () => {
   status.value.error = '';
   status.value.loading = true;
 
-  try {
-    await store.login({
-      email: email.value,
-      password: password.value,
-      rememberMe: rememberMe.value,
-    });
-  } catch (err: any) {
-    console.log('Login screen error');
-    console.log(err);
-    status.value.error = err;
-  }
+  const authResponse = async (): Promise<AuthResponse> => {
+    try {
+      if (signupPage.value) {
+        return await signup(email.value, password.value);
+      } else {
+        return await login(email.value, password.value, rememberMe.value);
+      }
+    } catch (err: any) {
+      console.log('Login screen error');
+      console.log(err);
+      return { status: 'Error', message: err };
+    }
+  };
   status.value.loading = false;
+  const res = await authResponse();
+  if (res.status === 'Error') status.value.error = res.message;
+  if (res.pushPage) router.push(res.pushPage);
 };
 </script>
 
 <template>
   <q-form class="form column">
-    <h1>{{ signup ? 'Signup' : 'Login' }}</h1>
+    <h1>{{ signupPage ? 'Signup' : 'Login' }}</h1>
 
     <q-input
       v-model="email"
@@ -58,13 +67,13 @@ const login = async () => {
         />
       </template>
     </q-input>
-    <q-checkbox v-model="rememberMe" label="Remember me" />
+    <q-checkbox v-model="rememberMe" v-if="!signup" label="Remember me" />
     <q-btn
       :loading="status.loading"
       color="primary"
-      label="Login"
+      :label="signupPage ? 'Signup' : 'Login'"
       class="q-my-md"
-      @click.prevent="login"
+      @click.prevent="processAuth"
     />
     <span v-if="status.error.length != 0" class="error ml2">{{
       status.error

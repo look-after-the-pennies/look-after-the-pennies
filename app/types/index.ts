@@ -7,3 +7,9 @@ export interface UserStoreDetails {
   expiresAt: number | undefined;
   loggedIn: boolean;
 }
+
+export interface AuthResponse {
+  status: string;
+  message: string;
+  pushPage?: string;
+}

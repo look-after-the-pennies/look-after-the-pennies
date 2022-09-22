@@ -23,6 +23,7 @@ export default class Auth {
       console.log(error);
       throw error;
     }
+    console.log(data);
     return data;
   }
 }

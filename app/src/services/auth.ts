@@ -1,5 +1,108 @@
-import Http from '../services/http';
+// TODO: Deprecate refresh items, handle server side
+import type { AuthResponse } from '../../types';
+import Http from './http';
 const apiURL = process.env.API_URL;
+
+export const login = async (
+  email: string,
+  password: string,
+  rememberMe: boolean
+): Promise<AuthResponse> => {
+  const http = new Http();
+
+  const requestURL = `${apiURL}/auth/login`;
+  const headers = {
+    'Content-Type': 'application/json',
+  };
+
+  const body = { email, password };
+  return await http
+    .request('post', requestURL, headers, body)
+    .then((res) => {
+      if (res.status === 200) {
+        if (rememberMe)
+          localStorage.setItem(
+            'remember-me',
+            JSON.stringify({ remember_me: rememberMe, email: email })
+          );
+
+        const requestedPage = localStorage.getItem('requestedPage');
+        const pushPage = requestedPage ? requestedPage : '/test';
+        if (requestedPage) localStorage.removeItem('requestedPage');
+        return { status: res, message: 'Login successful', pushPage: pushPage };
+      } else throw new Error(res.message);
+    })
+    .catch((err) => {
+      return {
+        status: 'Error',
+        message: err,
+      };
+    });
+};
+
+export const logout = async (): Promise<AuthResponse> => {
+  const http = new Http();
+
+  const requestURL = `${apiURL}/auth/logout`;
+  const headers = {
+    'Content-Type': 'application/json',
+  };
+
+  return await http
+    .request('post', requestURL, headers, null, true)
+    .then((res) => {
+      if (res.status === 200) {
+        const pushPage = '/';
+
+        return {
+          status: res,
+          message: 'Logged out',
+          pushPage: pushPage,
+        };
+      } else throw new Error(res.message);
+    })
+    .catch((err) => {
+      return {
+        status: 'Error',
+        message: err,
+      };
+    });
+};
+
+export const signup = async (
+  email: string,
+  password: string
+): Promise<AuthResponse> => {
+  const http = new Http();
+
+  const requestURL = `${apiURL}/auth/signup`;
+  const headers = {
+    'Content-Type': 'application/json',
+  };
+
+  const body = { email, password };
+  return await http
+    .request('post', requestURL, headers, body, false)
+    .then((res) => {
+      if (res.status === 200) {
+        const requestedPage = localStorage.getItem('requestedPage');
+        const pushPage = requestedPage ? requestedPage : '/';
+        if (requestedPage) localStorage.removeItem('requestedPage');
+
+        return {
+          status: res,
+          message: 'Signup successful - Please confirm your email address',
+          pushPage: pushPage,
+        };
+      } else throw new Error(res.message);
+    })
+    .catch((err) => {
+      return {
+        status: 'Error',
+        message: err,
+      };
+    });
+};
 
 interface RefreshDetails {
   refresh_token: string;
@@ -28,20 +131,15 @@ export const refreshToken = async (
   const body = { refreshToken: refreshToken };
   const details: RefreshDetails = { refresh_token: '', access_token: '' };
   try {
-    const response = await http
-      .request('post', requestURL, headers, body)
-      .then((response) => {
-        if (response.status === 200) {
-          localStorage.setItem(
-            'session',
-            JSON.stringify(response.data.session)
-          );
-          details.access_token = response.data.session.access_token;
-          details.refresh_token = response.data.session.refresh_token;
-        } else {
-          throw response;
-        }
-      });
+    await http.request('post', requestURL, headers, body).then((response) => {
+      if (response.status === 200) {
+        localStorage.setItem('session', JSON.stringify(response.data.session));
+        details.access_token = response.data.session.access_token;
+        details.refresh_token = response.data.session.refresh_token;
+      } else {
+        throw response;
+      }
+    });
   } catch (err: any) {
     //return error;
     console.log(err);

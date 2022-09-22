@@ -15,6 +15,7 @@ const dotenv: Record<string, string> = {
   SUPABASE_URL: getEnvVar('SUPABASE_URL'),
   SUPABASE_ANON_KEY: getEnvVar('SUPABASE_ANON_KEY'),
   SUPABASE_REST: getEnvVar('SUPABASE_REST'),
+  COOKIE_SECRET: getEnvVar('COOKIE_SECRET'),
 };
 
 export default dotenv;

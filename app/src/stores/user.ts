@@ -78,6 +78,53 @@ export const useUserStore = defineStore('user', {
         throw 'Login failed';
       }
     },
+    async signup(payload: { email: string; password: string }) {
+      const { email, password } = payload;
+      const http = new Http();
+
+      const requestURL = `${apiURL}/auth/signup`;
+      const headers = {
+        'Content-Type': 'application/json',
+      };
+
+      const body = { email, password };
+      //console.log(`body: ${body}`);
+      try {
+        const response = await http
+          .request('post', requestURL, headers, body)
+          .then((response) => {
+            // console.log('login response:');
+            // console.log(response);
+
+            if (response.status === 200) {
+              //localStorage.setItem('user', JSON.stringify(response.data.user));
+              localStorage.setItem(
+                'session',
+                JSON.stringify(response.data.session)
+              );
+
+              this.details.email = email;
+              this.details.userId = response.data.user.id;
+              this.details.accessToken = response.data.session.access_token;
+              this.details.refreshToken = response.data.session.refresh_token;
+              this.details.expiresAt = response.data.session.expires_at;
+              this.details.loggedIn = true;
+
+              const requestedPage = localStorage.getItem('requestedPage');
+              const pushPage = requestedPage ? requestedPage : '/';
+              if (requestedPage) localStorage.removeItem('requestedPage');
+
+              this.router.push(pushPage);
+              return response;
+            } else {
+              throw 'Signup failed status code';
+            }
+          });
+      } catch (err: any) {
+        //return error;
+        throw 'Signup failed';
+      }
+    },
     logout() {
       const user = useUserStore();
       localStorage.removeItem('session');

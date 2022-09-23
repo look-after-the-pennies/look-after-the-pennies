@@ -1,7 +1,9 @@
 // TODO: Deprecate refresh items, handle server side
+import { useUserStore } from 'stores/user';
 import type { AuthResponse } from '../../types';
 import Http from './http';
 const apiURL = process.env.API_URL;
+const store = useUserStore();
 
 export const login = async (
   email: string,
@@ -26,9 +28,9 @@ export const login = async (
             JSON.stringify({ remember_me: rememberMe, email: email })
           );
 
-        const requestedPage = localStorage.getItem('requestedPage');
+        const requestedPage = localStorage.getItem('requested-page');
         const pushPage = requestedPage ? requestedPage : '/test';
-        if (requestedPage) localStorage.removeItem('requestedPage');
+        if (requestedPage) localStorage.removeItem('requested-page');
         return { status: res, message: 'Login successful', pushPage: pushPage };
       } else throw new Error(res.message);
     })
@@ -52,7 +54,9 @@ export const logout = async (): Promise<AuthResponse> => {
     .request('post', requestURL, headers, null, true)
     .then((res) => {
       if (res.status === 200) {
-        const pushPage = '/';
+        const pushPage = '/login';
+        localStorage.removeItem('user-info');
+        store.$reset();
 
         return {
           status: res,
@@ -84,10 +88,10 @@ export const signup = async (
   return await http
     .request('post', requestURL, headers, body, false)
     .then((res) => {
-      if (res.status === 200) {
-        const requestedPage = localStorage.getItem('requestedPage');
+      if (res.status >= 200 && res.status < 300) {
+        const requestedPage = localStorage.getItem('requested-page');
         const pushPage = requestedPage ? requestedPage : '/';
-        if (requestedPage) localStorage.removeItem('requestedPage');
+        if (requestedPage) localStorage.removeItem('requested-page');
 
         return {
           status: res,

@@ -15,11 +15,11 @@ AuthRouter.post('/login', async function (req, res) {
   // Cookies that have been signed
   // TODO: Fix types not working for extended request object
   // @ts-ignore
-  console.log('Auth Cookie: ', authToken);
+  // console.log('Auth Cookie: ', authToken);
 
   try {
     const userDetails = await auth.login(req.body);
-    // console.log(userDetails);
+    console.log(userDetails);
     const session = userDetails.session ? userDetails.session : null;
 
     if (session) {
@@ -42,7 +42,13 @@ AuthRouter.post('/login', async function (req, res) {
       );
     }
 
-    res.status(200).send('Success');
+    res
+      .status(200)
+      .send({
+        user_id: session.user.id,
+        email: session.user.email,
+        expires_at: session.expires_at,
+      });
   } catch (err: any) {
     console.log(err.message);
     console.log(err.status);
@@ -57,7 +63,7 @@ AuthRouter.post('/login', async function (req, res) {
   }
 });
 
-// TODO: Only sometimes clering cookie
+// TODO: Only sometimes clearing cookie
 AuthRouter.post('/logout', async function (req, res) {
   // @ts-ignore
   const authToken = req.signedCookies['X-LATP-Auth-Token'];
@@ -100,8 +106,10 @@ AuthRouter.post('/signup', async function (req, res) {
       userDetails.user.confirmation_sent_at
     ) {
       res
-        .status(401)
-        .send('You must confirm your email address before attempting to login');
+        .status(201)
+        .send(
+          'Signup successful! Please confirm your email address before logging in.'
+        );
       return;
     }
     res.status(200).send('Success');

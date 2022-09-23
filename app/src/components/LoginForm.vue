@@ -7,14 +7,16 @@ import type { AuthResponse } from '../../types';
 const route = useRoute();
 const router = useRouter();
 
-const password = ref('test');
+const password = ref('test123');
 const localRememberMe = localStorage.getItem('remember-me');
 const localRememberMeParsed = localRememberMe
   ? JSON.parse(localRememberMe)
   : null;
 
 const email = ref(
-  localRememberMeParsed ? localRememberMeParsed.email : 'test@test.com'
+  localRememberMeParsed
+    ? localRememberMeParsed.email
+    : 'lets@lookafterthepennies.com'
 );
 const rememberMe = ref(
   localRememberMeParsed ? localRememberMeParsed.remember_me : false
@@ -40,10 +42,12 @@ const processAuth = async () => {
       return { status: 'Error', message: err };
     }
   };
-  status.value.loading = false;
+
   const res = await authResponse();
   if (res.status === 'Error') status.value.error = res.message;
   if (res.pushPage) router.push(res.pushPage);
+  // we're done, we reset loading state
+  status.value.loading = false;
 };
 </script>
 
@@ -67,7 +71,7 @@ const processAuth = async () => {
         />
       </template>
     </q-input>
-    <q-checkbox v-model="rememberMe" v-if="!signup" label="Remember me" />
+    <q-checkbox v-model="rememberMe" v-if="!signupPage" label="Remember me" />
     <q-btn
       :loading="status.loading"
       color="primary"
@@ -78,16 +82,16 @@ const processAuth = async () => {
     <span v-if="status.error.length != 0" class="error ml2">{{
       status.error
     }}</span>
-    <span v-if="status.loading" class="loading ml2">Loading...</span>
+    <!-- <span v-if="status.loading" class="loading ml2">Loading...</span> -->
   </q-form>
 </template>
 
 <style scoped lang="scss">
 .form {
-  padding: 2rem;
+  padding: 1.5rem;
   border: 1px solid $blue-grey-9;
   border-radius: 0.25rem;
-  width: 35%;
+  width: 400px;
   margin: 0 auto;
 }
 </style>

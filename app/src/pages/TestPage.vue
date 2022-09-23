@@ -7,6 +7,7 @@ const router = useRouter();
 const logoutRequest = async () => {
   await logout()
     .then((res) => {
+      console.log(JSON.stringify(res));
       if (res.pushPage) router.push(res.pushPage);
     })
     .catch((err: any) => {
@@ -17,8 +18,22 @@ const logoutRequest = async () => {
 </script>
 
 <template>
-  <q-page class="column q-py-lg q-px-md">
-    <h1>You've logged in</h1>
-    <q-btn @click.prevent="logoutRequest" class="q-mt-lg">Logout</q-btn>
+  <q-page class="column q-py-xl q-px-md">
+    <q-form class="form column">
+      <h1>You've logged in</h1>
+      <q-btn @click.prevent="logoutRequest" class="q-mt-lg" color="primary"
+        >Logout</q-btn
+      >
+    </q-form>
   </q-page>
 </template>
+
+<style scoped lang="scss">
+.form {
+  padding: 2rem;
+  border: 1px solid $blue-grey-9;
+  border-radius: 0.25rem;
+  width: 400px;
+  margin: 10% auto;
+}
+</style>

@@ -1,28 +1,23 @@
 import { Router } from 'express';
 import Accounts from '../services/accounts';
-import { setRequestUser } from './middleware/set-user';
+import setSession from './middleware/set-session';
 
 const AccountsRouter = Router();
-AccountsRouter.use(setRequestUser);
+AccountsRouter.use(setSession);
 
 // === Get Accounts ====
 
 AccountsRouter.get('/', async function (req, res) {
-  console.log(JSON.stringify(req.currentUser));
-  console.log(req.body);
-
+  console.log('logging current session from request');
+  console.log(JSON.stringify(req.currentSession));
   const accounts = new Accounts();
 
   accounts
     .accountsList()
-    .then((res) => {
-      console.log(JSON.stringify(res));
-      res.status(200).send({});
+    .then((accounts: any) => {
+      res.status(200).send(accounts);
     })
     .catch((err: any) => {
-      console.log(err.message);
-      console.log(err.status);
-
       console.log(err);
       if (err.status) {
         res.status(err.status).send(err.message);
@@ -36,7 +31,7 @@ AccountsRouter.get('/', async function (req, res) {
 // === Upsert Account Type ====
 
 AccountsRouter.post('/type', async function (req, res) {
-  console.log(JSON.stringify(req.currentUser));
+  console.log(JSON.stringify(req.currentSession));
   console.log(req.body);
 
   const accounts = new Accounts();
@@ -64,7 +59,7 @@ AccountsRouter.post('/type', async function (req, res) {
 // === Delete Account Type ====
 
 AccountsRouter.delete('/type', async function (req, res) {
-  console.log(JSON.stringify(req.currentUser));
+  console.log(JSON.stringify(req.currentSession));
   console.log(req.body);
 
   const accounts = new Accounts();
@@ -92,7 +87,7 @@ AccountsRouter.delete('/type', async function (req, res) {
 // === Upsert Account ====
 
 AccountsRouter.post('/', async function (req, res) {
-  console.log(JSON.stringify(req.currentUser));
+  console.log(JSON.stringify(req.currentSession));
   console.log(req.body);
 
   const accounts = new Accounts();
@@ -120,7 +115,7 @@ AccountsRouter.post('/', async function (req, res) {
 // === Delete Account Type ====
 
 AccountsRouter.delete('/', async function (req, res) {
-  console.log(JSON.stringify(req.currentUser));
+  console.log(JSON.stringify(req.currentSession));
   console.log(req.body);
 
   const accounts = new Accounts();

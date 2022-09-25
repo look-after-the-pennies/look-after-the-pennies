@@ -15,19 +15,4 @@ export default class Auth {
     console.log(data);
     return data;
   }
-
-  async getUser(authCookie: AuthCookie) {
-    const {
-      data: { user },
-    } = await DB.auth.getUser(authCookie.accessToken);
-    console.log(JSON.stringify(user));
-    return user ? user : await this.setUser(authCookie.refreshToken);
-  }
-
-  async setUser(refreshToken: string) {
-    const { data, error } = await DB.auth.setSession(refreshToken);
-    console.log(JSON.stringify(data));
-    if (error) ErrorHandler.dbRequest(error);
-    return data.user;
-  }
 }

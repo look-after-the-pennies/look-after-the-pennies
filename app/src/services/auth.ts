@@ -29,7 +29,7 @@ export const login = async (
           );
 
         const requestedPage = localStorage.getItem('requested-page');
-        const pushPage = requestedPage ? requestedPage : '/test';
+        const pushPage = requestedPage ? requestedPage : '/';
         if (requestedPage) localStorage.removeItem('requested-page');
         return { status: res, message: 'Login successful', pushPage: pushPage };
       } else throw new Error(res.message);

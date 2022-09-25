@@ -2,7 +2,7 @@ import supabase from './supabase';
 
 const DB = {
   auth: supabase.auth,
-  from: supabase.from,
+  supabase: supabase,
 };
 
 export default DB;

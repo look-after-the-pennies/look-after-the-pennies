@@ -1,12 +1,11 @@
-
 const dbRequestHandler = (error: any) => {
-    console.log(JSON.stringify(error));
-    throw error;
-  };
+  console.log('dbRequestHandler(error)');
+  console.log(error);
+  throw error;
+};
 
+const errorHandler = {
+  dbRequest: dbRequestHandler,
+};
 
-  const errorHandler = {
-    dbRequest: dbRequestHandler
-  }
-
-  export default errorHandler;
+export default errorHandler;

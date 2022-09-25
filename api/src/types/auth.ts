@@ -5,3 +5,8 @@ export interface UserDetails {
 }
 
 export type AuthActions = 'login' | 'signup';
+
+export interface AuthCookie {
+  accessToken: string;
+  refreshToken: string;
+}

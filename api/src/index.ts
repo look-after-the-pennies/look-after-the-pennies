@@ -1,7 +1,7 @@
 import './config/dotenv-init';
 const app = require('express')();
 
-import defaultMiddleware from './middleware/index';
+import defaultMiddleware from './routes/middleware/index';
 import router from './routes/index';
 
 const port = process.env.PORT;

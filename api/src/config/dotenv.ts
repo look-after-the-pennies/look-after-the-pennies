@@ -12,6 +12,7 @@ const dotenv: Record<string, string> = {
   NODE_ENV: getEnvVar('NODE_ENV'),
   WEB_DOMAIN: getEnvVar('WEB_DOMAIN'),
   API_DOMAIN: getEnvVar('API_DOMAIN'),
+  APP_ORIGIN: getEnvVar('APP_ORIGIN'),
   SUPABASE_URL: getEnvVar('SUPABASE_URL'),
   SUPABASE_ANON_KEY: getEnvVar('SUPABASE_ANON_KEY'),
   SUPABASE_REST: getEnvVar('SUPABASE_REST'),

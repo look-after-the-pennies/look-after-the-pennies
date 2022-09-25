@@ -5,10 +5,10 @@ import Http from './http';
 const apiURL = process.env.API_URL;
 const store = useUserStore();
 
-const get = async (): Promise<AuthResponse> => {
+export const get = async (): Promise<AuthResponse> => {
   const http = new Http();
 
-  const requestURL = `${apiURL}/accounts`;
+  const requestURL = `${apiURL}/transactions`;
 
   return await http
     .request('get', requestURL)
@@ -26,8 +26,9 @@ const get = async (): Promise<AuthResponse> => {
     });
 };
 
-const accounts = {
+const transactions = {
   get: get,
 };
 
-export default accounts;
+export default transactions;
+

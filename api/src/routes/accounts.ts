@@ -13,7 +13,7 @@ AccountsRouter.get('/', async function (req, res) {
   const accounts = new Accounts();
 
   accounts
-    .accountsList()
+    .get()
     .then((accounts: any) => {
       res.status(200).send(accounts);
     })

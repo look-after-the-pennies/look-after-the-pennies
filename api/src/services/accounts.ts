@@ -3,7 +3,7 @@ import type { Account, AccountType } from '../types/db-tables';
 import ErrorHandler from './errors';
 
 export default class Accounts {
-  async accountsList(): Promise<any> {
+  async get(): Promise<any> {
     try {
       const { data, error } = await DB.supabase.from('account_types').select(`
     account_type,

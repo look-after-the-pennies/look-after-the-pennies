@@ -1,13 +1,22 @@
 <script setup lang="ts">
-import { useRouter } from 'vue-router';
-import { getAccounts } from '../services/accounts';
+import Accounts from '../services/accounts';
+import Transactions from '../services/transactions';
 
-const router = useRouter();
-const listAccounts = async () => {
-  await getAccounts()
+const getAccounts = async () => {
+  await Accounts.get()
     .then((res) => {
       console.log(JSON.stringify(res));
-      if (res.pushPage) router.push(res.pushPage);
+    })
+    .catch((err: any) => {
+      console.log('fetch error');
+      console.log(err);
+    });
+};
+
+const getTransactions = async () => {
+  await Transactions.get()
+    .then((res) => {
+      console.log(JSON.stringify(res));
     })
     .catch((err: any) => {
       console.log('fetch error');
@@ -20,8 +29,12 @@ const listAccounts = async () => {
   <q-page class="column q-py-xl q-px-md">
     <q-form class="form column">
       <h1>You've logged in</h1>
-      <q-btn @click.prevent="listAccounts" class="q-mt-lg" color="primary"
-        >Logout</q-btn
+      <q-btn @click.prevent="getAccounts" class="q-mt-lg" color="primary"
+        >Accounts</q-btn
+      >
+
+      <q-btn @click.prevent="getTransactions" class="q-mt-lg" color="primary"
+        >Transactions</q-btn
       >
     </q-form>
   </q-page>

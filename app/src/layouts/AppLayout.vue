@@ -29,7 +29,7 @@
           dense
           v-model="search"
           color="shadow-1"
-          placeholder="Search for topics, locations & sources"
+          placeholder="Search for accounts, transactions or settings"
         >
           <template v-slot:prepend>
             <q-icon v-if="search === ''" name="search" />
@@ -116,7 +116,7 @@
             dense
             flat
             color="white"
-            icon="fa-user"
+            icon="settings"
             class="q-ml-md"
           >
             <q-avatar size="26px">

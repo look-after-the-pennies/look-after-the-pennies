@@ -1,4 +1,4 @@
-import Database from '../database/index';
+import DB from '../database/index';
 import type { UserDetails } from '../types/auth';
 
 export default class Auth {
@@ -8,7 +8,7 @@ export default class Auth {
     //   : { refreshToken: req.refreshToken };
     // console.log(userDetails);
 
-    const { data, error } = await Database.auth.signInWithPassword(userDetails);
+    const { data, error } = await DB.auth.signInWithPassword(userDetails);
     if (error) {
       console.log(JSON.stringify(error));
       console.log('error in auth service');
@@ -18,7 +18,7 @@ export default class Auth {
   }
 
   async signup(userDetails: UserDetails): Promise<any> {
-    const { data, error } = await Database.auth.signUp(userDetails);
+    const { data, error } = await DB.auth.signUp(userDetails);
     if (error) {
       console.log(error);
       throw error;

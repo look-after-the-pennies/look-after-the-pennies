@@ -1,7 +1,8 @@
 import supabase from './supabase';
 
-const Database = {
-	auth: supabase.auth
+const DB = {
+  auth: supabase.auth,
+  from: supabase.from,
 };
 
-export default Database;
+export default DB;

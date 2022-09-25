@@ -42,13 +42,11 @@ AuthRouter.post('/login', async function (req, res) {
       );
     }
 
-    res
-      .status(200)
-      .send({
-        user_id: session.user.id,
-        email: session.user.email,
-        expires_at: session.expires_at,
-      });
+    res.status(200).send({
+      user_id: session.user.id,
+      email: session.user.email,
+      expires_at: session.expires_at,
+    });
   } catch (err: any) {
     console.log(err.message);
     console.log(err.status);
@@ -63,7 +61,6 @@ AuthRouter.post('/login', async function (req, res) {
   }
 });
 
-// TODO: Only sometimes clearing cookie
 AuthRouter.post('/logout', async function (req, res) {
   // @ts-ignore
   const authToken = req.signedCookies['X-LATP-Auth-Token'];

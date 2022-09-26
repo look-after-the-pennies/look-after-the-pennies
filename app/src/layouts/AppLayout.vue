@@ -144,6 +144,7 @@
             v-for="link in links1"
             :key="link.text"
             clickable
+            :to="link.name"
           >
             <q-item-section avatar>
               <q-icon :name="link.icon" />
@@ -258,7 +259,8 @@ function toggleLeftDrawer() {
 
 const links1 = [
   { icon: 'web', text: 'Dashboard' },
-  { icon: 'person', text: 'My accounts' },
+  { icon: 'person', text: 'My accounts', name: 'Accounts' },
+  { icon: 'dashboard', text: 'Transactions', name: 'Transactions' },
   { icon: 'star_border', text: 'Favourites' },
   { icon: 'search', text: 'Saved searches' },
   { icon: 'flag', text: 'Tasks' },

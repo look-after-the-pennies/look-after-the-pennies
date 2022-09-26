@@ -8,17 +8,18 @@ import LocalStorage from '../services/local-storage';
 export const useUserStore = defineStore('user', {
   state: () => {
     return {
-      user: null as UserInfo | null,
+      user: (localStorage.getItem('user-info') || null) as UserInfo | null,
     };
   },
   getters: {},
   actions: {
-    async init() {
-      const localStorage = await LocalStorage.userInfo();
-      console.log('user localstorage parsed');
-      console.log(localStorage);
-      this.user = localStorage;
-    },
+    // async init() {
+    //   const localStorage = await LocalStorage.userInfo();
+    //   console.log('user localstorage parsed');
+    //   console.log(localStorage);
+    //   return localStorage;
+    //   // this.user = localStorage;
+    // },
 
     logout() {
       const user = useUserStore();

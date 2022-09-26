@@ -1,4 +1,5 @@
 // TODO: Deprecate refresh items, handle server side
+import stores from 'src/stores';
 import { useUserStore } from 'stores/user';
 import type { AuthResponse } from '../../types';
 import Http from './http';
@@ -24,9 +25,10 @@ export const login = async (
       if (res.status === 200) {
         if (rememberMe)
           localStorage.setItem(
-            'remember-me',
-            JSON.stringify({ remember_me: rememberMe, email: email })
+            'user-info',
+            JSON.stringify({ remember_me: rememberMe, ...res.data })
           );
+        store.user = res.data;
 
         const requestedPage = localStorage.getItem('requested-page');
         const pushPage = requestedPage ? requestedPage : '/';

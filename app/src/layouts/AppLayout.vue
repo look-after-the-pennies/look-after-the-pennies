@@ -1,4 +1,5 @@
 <template>
+  <!-- TODO: This layout is full of warnigns and errors, re-write completely. -->
   <q-layout view="hHh lpR fFf" class="bg-grey-1">
     <q-header elevated class="bg-primary text-white" height-hint="64">
       <q-toolbar class="GNL__toolbar">
@@ -188,7 +189,15 @@
                 class="GNL__drawer-footer-link"
                 href="javascript:void(0)"
                 aria-label="About"
-                >About Look After The Pennies</a
+                >About</a
+              >
+              <span> · </span>
+              <a
+                class="GNL__drawer-footer-link"
+                href="javascript:void(0)"
+                @click.prevent="logout"
+                aria-label="Logout"
+                >Logout</a
               >
             </div>
           </div>
@@ -205,6 +214,22 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 import { fasEarthAmericas, fasFlask } from '@quasar/extras/fontawesome-v6';
+import { useRouter } from 'vue-router';
+import { logout } from '../services/auth';
+
+const router = useRouter();
+
+const logoutRequest = async () => {
+  await logout()
+    .then((res) => {
+      console.log(JSON.stringify(res));
+      if (res.pushPage) router.push(res.pushPage);
+    })
+    .catch((err: any) => {
+      console.log('Logout error');
+      console.log(err);
+    });
+};
 
 const leftDrawerOpen = ref(false);
 const search = ref('');
@@ -215,6 +240,7 @@ const hasWords = ref('');
 const excludeWords = ref('');
 const byWebsite = ref('');
 const byDate = ref('Any time');
+
 function onClear() {
   exactPhrase.value = '';
   hasWords.value = '';

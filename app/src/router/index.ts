@@ -8,8 +8,8 @@ import {
 
 import routes from './routes';
 
-// import { useUserStore } from 'stores/user';
-// const store = useUserStore();
+import { useUserStore } from 'stores/user';
+
 // store.init();
 
 /*
@@ -38,17 +38,18 @@ export default route(function (/* { store, ssrContext } */) {
     history: createHistory(process.env.VUE_ROUTER_BASE),
   });
 
-  // Router.beforeEach(async (to, from) => {
-  //   if (
-  //     // make sure the user is authenticated
-  //     !store.user?.id &&
-  //     // ❗️ Avoid an infinite redirect
-  //     to.name !== 'Login'
-  //   ) {
-  //     // redirect the user to the login page
-  //     return { name: 'Login' };
-  //   }
-  // });
+  Router.beforeEach(async (to, from) => {
+    const store = useUserStore();
+    if (
+      // make sure the user is authenticated
+      !store.user &&
+      // ❗️ Avoid an infinite redirect
+      to.name !== 'Login'
+    ) {
+      // redirect the user to the login page
+      return { name: 'Login' };
+    }
+  });
 
   return Router;
 });

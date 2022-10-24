@@ -1,6 +1,12 @@
 <script setup lang="ts">
+import { useAccountsStore } from 'src/stores/accounts';
 import Accounts from '../services/accounts';
-import Transactions from '../services/transactions';
+
+const store = useAccountsStore();
+
+if (store.accountTypes.length === 0) store.getTypes();
+
+store.get();
 
 const getAccounts = async () => {
   await Accounts.get()
@@ -13,9 +19,10 @@ const getAccounts = async () => {
     });
 };
 
-const getTransactions = async () => {
-  await Transactions.get()
+const getTypes = async () => {
+  await Accounts.getTypes()
     .then((res) => {
+      console.log('accounts page response print');
       console.log(JSON.stringify(res));
     })
     .catch((err: any) => {
@@ -23,6 +30,8 @@ const getTransactions = async () => {
       console.log(err);
     });
 };
+
+getTypes();
 </script>
 
 <template>
@@ -32,10 +41,11 @@ const getTransactions = async () => {
       <q-btn @click.prevent="getAccounts" class="q-mt-lg" color="primary"
         >Accounts</q-btn
       >
-
-      <q-btn @click.prevent="getTransactions" class="q-mt-lg" color="primary"
-        >Transactions</q-btn
-      >
     </q-form>
+    <ul>
+      <li v-for="(acc, index) in store.accounts" :key="index">
+        {{ acc.account_type }}
+      </li>
+    </ul>
   </q-page>
 </template>

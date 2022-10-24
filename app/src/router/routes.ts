@@ -23,6 +23,11 @@ const routes: RouteRecordRaw[] = [
         name: 'Accounts',
         component: () => import('pages/AccountsPage.vue'),
       },
+      {
+        path: 'add',
+        name: 'Add Account',
+        component: () => import('pages/AccountsAddPage.vue'),
+      },
     ],
   },
   {

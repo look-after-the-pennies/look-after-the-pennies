@@ -21,13 +21,13 @@ export default class Auth {
   }
 
   async setSession() {
-    console.log('setting session on supabase');
+    // console.log('setting session on supabase');
     try {
       const { data, error } = await DB.auth.setSession(
         this.authCookie.refreshToken
       );
-      console.log('user returned from setting supabase session');
-      console.log(JSON.stringify(data));
+      // console.log('user returned from setting supabase session');
+      // console.log(JSON.stringify(data));
       if (error) throw error;
 
       if (data.session) {

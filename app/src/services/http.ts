@@ -1,4 +1,4 @@
-import axios from 'axios';
+import { api } from 'boot/axios';
 export default class Http {
   async request(
     method: string,
@@ -19,7 +19,7 @@ export default class Http {
     );
     //console.log(options);
     try {
-      const response = await axios.request(options);
+      const response = await api.request(options);
       //console.log('finding success');
       console.log(response);
       const res = {
@@ -29,13 +29,16 @@ export default class Http {
       };
       return res;
     } catch (error: any) {
+      // console.log(error);
       const errResponse = error.response;
       const err = {
         status: errResponse ? errResponse.status : 500,
         message: errResponse ? errResponse.data : 'Request failed',
         responseReceived: errResponse ? true : false,
       };
+      console.log('http service error log:');
       console.log(err);
+      // Return error so that processing can happen further down the line
       return err;
     }
   }

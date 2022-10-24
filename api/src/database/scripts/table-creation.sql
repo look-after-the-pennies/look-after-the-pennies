@@ -65,6 +65,8 @@ begin;
         account_type_id int references account_types not null,
         account_name text not null,
         logo text null,
+        opening_balance numeric(20,2) not null,
+        date_started date not null,
         created_by uuid not null references auth.users default auth.uid(),
         created_at timestamp with time zone default timezone('utc' :: text, now()) not null,
         updated_by uuid not null references auth.users default auth.uid(),

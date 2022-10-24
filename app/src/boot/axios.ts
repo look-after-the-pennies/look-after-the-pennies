@@ -1,5 +1,5 @@
-import { boot } from 'quasar/wrappers';
 import axios, { AxiosInstance } from 'axios';
+import { boot } from 'quasar/wrappers';
 
 declare module '@vue/runtime-core' {
   interface ComponentCustomProperties {
@@ -14,6 +14,20 @@ declare module '@vue/runtime-core' {
 // "export default () => {}" function below (which runs individually
 // for each client)
 const api = axios.create({ baseURL: 'https://api.example.com' });
+api.interceptors.response.use(
+  (response) => {
+    return response;
+  },
+  async (error) => {
+    if (error.response.status === 401) {
+      // Do something, call refreshToken() request for example;
+      // return a request
+      window.location.href = '/login';
+    }
+
+    return Promise.reject(error);
+  }
+);
 
 export default boot(({ app }) => {
   // for use inside Vue files (Options API) through this.$axios and this.$api

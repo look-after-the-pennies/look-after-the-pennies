@@ -23,12 +23,14 @@ export const login = async (
     .request('post', requestURL, headers, body)
     .then((res) => {
       if (res.status === 200) {
-        if (rememberMe)
-          localStorage.setItem(
-            'user-info',
-            JSON.stringify({ remember_me: rememberMe, ...res.data })
-          );
-        store.user = res.data;
+        const user = {
+          id: res.data.user_id,
+          email: res.data.email,
+          expires_at: res.data.expires_at,
+          remember_me: rememberMe,
+        };
+        if (rememberMe) localStorage.setItem('user-info', JSON.stringify(user));
+        store.user = user;
 
         const requestedPage = localStorage.getItem('requested-page');
         const pushPage = requestedPage ? requestedPage : '/';

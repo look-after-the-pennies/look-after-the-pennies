@@ -2,7 +2,6 @@
 import Accounts from '../services/accounts';
 import Transactions from '../services/transactions';
 
-
 const getAccounts = async () => {
   await Accounts.get()
     .then((res) => {

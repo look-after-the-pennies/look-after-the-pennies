@@ -28,16 +28,39 @@ AccountsRouter.get('/', async function (req, res) {
     });
 });
 
+// === Get Account Types ====
+
+AccountsRouter.get('/types', async function (req, res) {
+  // console.log('logging current session from request');
+  // console.log(JSON.stringify(req.currentSession));
+  const accounts = new Accounts();
+
+  accounts
+    .getTypes()
+    .then((accounts: any) => {
+      res.status(200).send(accounts);
+    })
+    .catch((err: any) => {
+      console.log(err);
+      if (err.status) {
+        res.status(err.status).send(err.message);
+      } else {
+        console.log('hitting 500 error');
+        res.status(500).send('Server error');
+      }
+    });
+});
+
 // === Upsert Account Type ====
 
-AccountsRouter.post('/type', async function (req, res) {
+AccountsRouter.post('/types', async function (req, res) {
   console.log(JSON.stringify(req.currentSession));
   console.log(req.body);
 
   const accounts = new Accounts();
 
   accounts
-    .upsertAccountType(req.body)
+    .upsertType(req.body)
     .then((res) => {
       console.log(JSON.stringify(res));
       res.status(200).send({});
@@ -58,14 +81,14 @@ AccountsRouter.post('/type', async function (req, res) {
 
 // === Delete Account Type ====
 
-AccountsRouter.delete('/type', async function (req, res) {
+AccountsRouter.delete('/types', async function (req, res) {
   console.log(JSON.stringify(req.currentSession));
   console.log(req.body);
 
   const accounts = new Accounts();
 
   accounts
-    .deleteAccountType(req.body)
+    .deleteType(req.body)
     .then((res) => {
       console.log(JSON.stringify(res));
       res.status(200).send({});
@@ -88,26 +111,30 @@ AccountsRouter.delete('/type', async function (req, res) {
 
 AccountsRouter.post('/', async function (req, res) {
   console.log(JSON.stringify(req.currentSession));
-  console.log(req.body);
+  // console.log(req.body);
 
   const accounts = new Accounts();
-
+  console.log('got to post');
+  console.log(req.body);
   accounts
-    .upsertAccount(req.body)
+    .upsert(req.body, req.currentSession.refresh_token)
     .then((res) => {
+      console.log('post response body');
       console.log(JSON.stringify(res));
       res.status(200).send({});
     })
     .catch((err: any) => {
-      console.log(err.message);
-      console.log(err.status);
+      // console.log(err.message);
+      // console.log(err.status);
 
-      console.log(err);
+      // console.log(err);
       if (err.status) {
         res.status(err.status).send(err.message);
       } else {
         console.log('hitting 500 error');
-        res.status(500).send('Server error');
+        res
+          .status(500)
+          .send(err.message ? err.message : err ? err : 'Server error');
       }
     });
 });
@@ -121,7 +148,7 @@ AccountsRouter.delete('/', async function (req, res) {
   const accounts = new Accounts();
 
   accounts
-    .deleteAccount(req.body)
+    .delete(req.body)
     .then((res) => {
       console.log(JSON.stringify(res));
       res.status(200).send({});

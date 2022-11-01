@@ -110,6 +110,7 @@ AccountsRouter.delete('/types', async function (req, res) {
 // === Upsert Account ====
 
 AccountsRouter.post('/', async function (req, res) {
+  console.log('request current session');
   console.log(JSON.stringify(req.currentSession));
   // console.log(req.body);
 
@@ -117,7 +118,11 @@ AccountsRouter.post('/', async function (req, res) {
   console.log('got to post');
   console.log(req.body);
   accounts
-    .upsert(req.body, req.currentSession.refresh_token)
+    .upsert(
+      req.body,
+      req.currentSession.session.refresh_token,
+      req.currentSession.session.access_token
+    )
     .then((res) => {
       console.log('post response body');
       console.log(JSON.stringify(res));

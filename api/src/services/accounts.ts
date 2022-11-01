@@ -2,6 +2,7 @@ import DB from '../database/index';
 import type { Account, AccountType } from '../types/db-tables';
 import { Session } from './../types/auth';
 import ErrorHandler from './errors';
+// import SessionService from './session';
 
 export default class Accounts {
   async get(): Promise<any> {
@@ -45,15 +46,29 @@ export default class Accounts {
     return data;
   }
 
-  async upsert(account: Account['Insert'], session: any): Promise<any> {
+  async upsert(
+    account: Account['Insert'],
+    refreshToken: string,
+    accessToken: string
+  ): Promise<any> {
+    // const sessionService = new SessionService();
     console.log('got to service upsrt');
-    const { data, error } = await DB.auth.setSession(session);
-    console.log(data);
-    console.log(error);
+    console.log(refreshToken);
+    // @ts-ignore
+    const { data, error } = await DB.auth.setSession({
+      access_token: accessToken,
+      refresh_token: refreshToken,
+    });
 
-    const { data: d, error: e } = await DB.auth.getSession();
-    console.log(d);
-    console.log(e);
+    const u = await DB.auth.getUser();
+    console.log('Has user set');
+    console.log(u);
+    // console.log(data);
+    // console.log(error);
+
+    // const { data: d, error: e } = await DB.auth.getSession();
+    // console.log(d);
+    // console.log(e);
 
     const { data: data2, error: error2 } = await DB.supabase
       .from('accounts')

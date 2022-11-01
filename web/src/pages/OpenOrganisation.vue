@@ -1,3 +1,4 @@
+<script setup lang="ts"></script>
 <template>
   <main class="text-slate-700">
     <div

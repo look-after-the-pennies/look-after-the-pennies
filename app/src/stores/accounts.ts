@@ -41,7 +41,7 @@ export const useAccountsStore = defineStore('accounts', {
     },
     async create(account: AddAccount): Promise<AddAccount> {
       const http = new Http();
-      const requestURL = `${apiURL}/accounts`;
+      const requestURL = `${apiURL}/accounts/test`;
       const headers = {
         'Content-Type': 'application/json',
       };

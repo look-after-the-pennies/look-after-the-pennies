@@ -144,6 +144,43 @@ AccountsRouter.post('/', async function (req, res) {
     });
 });
 
+// === Upsert Test ====
+
+AccountsRouter.post('/test', async function (req, res) {
+  console.log('request current session');
+  console.log(JSON.stringify(req.currentSession));
+  // console.log(req.body);
+
+  const accounts = new Accounts();
+  console.log('got to post');
+  console.log(req.body);
+  accounts
+    .test(
+      req.body,
+      req.currentSession.session.refresh_token,
+      req.currentSession.session.access_token
+    )
+    .then((res) => {
+      console.log('post response body');
+      console.log(JSON.stringify(res));
+      res.status(200).send({});
+    })
+    .catch((err: any) => {
+      // console.log(err.message);
+      // console.log(err.status);
+
+      // console.log(err);
+      if (err.status) {
+        res.status(err.status).send(err.message);
+      } else {
+        console.log('hitting 500 error');
+        res
+          .status(500)
+          .send(err.message ? err.message : err ? err : 'Server error');
+      }
+    });
+});
+
 // === Delete Account Type ====
 
 AccountsRouter.delete('/', async function (req, res) {

@@ -3,6 +3,8 @@ import type { Account, AccountType } from '../types/db-tables';
 import { Session } from './../types/auth';
 import ErrorHandler from './errors';
 // import SessionService from './session';
+// import dbClient from './database';
+import createServerDbClient from './database';
 
 export default class Accounts {
   async get(): Promise<any> {
@@ -46,13 +48,48 @@ export default class Accounts {
     return data;
   }
 
+  async test(
+    account: Account['Insert'],
+    refreshToken: string,
+    accessToken: string
+  ): Promise<any> {
+    // const sessionService = new SessionService();
+    console.log('got to service upsert');
+    console.log(refreshToken);
+    const db = createServerDbClient(accessToken);
+    const u = db.auth.getUser();
+    console.log(u);
+    // @ts-ignore
+    // const { data, error } = await DB.auth.setSession({
+    //   access_token: accessToken,
+    //   refresh_token: refreshToken,
+    // });
+
+    // const u = await DB.auth.getUser();
+    // console.log('Has user set');
+    // console.log(u);
+    // console.log(data);
+    // console.log(error);
+
+    // const { data: d, error: e } = await DB.auth.getSession();
+    // console.log(d);
+    // console.log(e);
+
+    const { data: data2, error: error2 } = await db
+      .from('accounts')
+      //@ts-ignore
+      .upsert(account);
+    if (error2) ErrorHandler.dbRequest(error2);
+    return data2;
+  }
+
   async upsert(
     account: Account['Insert'],
     refreshToken: string,
     accessToken: string
   ): Promise<any> {
     // const sessionService = new SessionService();
-    console.log('got to service upsrt');
+    console.log('got to service upsert');
     console.log(refreshToken);
     // @ts-ignore
     const { data, error } = await DB.auth.setSession({

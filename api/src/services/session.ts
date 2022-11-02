@@ -24,6 +24,7 @@ export default class Auth {
     // console.log('setting session on supabase');
     try {
       const { data, error } = await DB.auth.setSession(
+        //@ts-ignore
         this.authCookie.refreshToken
       );
       // console.log('user returned from setting supabase session');

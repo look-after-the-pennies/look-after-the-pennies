@@ -9,35 +9,6 @@ export type Json =
 export interface Database {
   public: {
     Tables: {
-      account_types: {
-        Row: {
-          id: number;
-          account_type: string;
-          active: boolean | null;
-          creator_id: string;
-          created_at: string;
-          updated_by: string;
-          updated_at: string;
-        };
-        Insert: {
-          id?: never;
-          account_type: string;
-          active?: boolean | null;
-          creator_id?: string;
-          created_at?: string;
-          updated_by?: string;
-          updated_at?: string;
-        };
-        Update: {
-          id?: never;
-          account_type?: string;
-          active?: boolean | null;
-          creator_id?: string;
-          created_at?: string;
-          updated_by?: string;
-          updated_at?: string;
-        };
-      };
       accounts: {
         Row: {
           id: string;
@@ -49,6 +20,8 @@ export interface Database {
           created_at: string;
           updated_by: string;
           updated_at: string;
+          opening_balance: number;
+          date_started: string;
         };
         Insert: {
           id?: string;
@@ -60,6 +33,8 @@ export interface Database {
           created_at?: string;
           updated_by?: string;
           updated_at?: string;
+          opening_balance: number;
+          date_started: string;
         };
         Update: {
           id?: string;
@@ -71,12 +46,67 @@ export interface Database {
           created_at?: string;
           updated_by?: string;
           updated_at?: string;
+          opening_balance?: number;
+          date_started?: string;
         };
       };
-      transaction_types: {
+      transactions: {
+        Row: {
+          id: string;
+          account_id: string;
+          transaction_type_id: number;
+          transaction_category_id: string | null;
+          transaction_timestamp: string;
+          transaction_reference: string | null;
+          additional_information: string | null;
+          amount: number;
+          manual_entry: boolean | null;
+          csv_entry: boolean | null;
+          auto_sync_entry: boolean | null;
+          created_by: string;
+          created_at: string;
+          updater_id: string;
+          updated_at: string;
+        };
+        Insert: {
+          id?: string;
+          account_id: string;
+          transaction_type_id: number;
+          transaction_category_id?: string | null;
+          transaction_timestamp?: string;
+          transaction_reference?: string | null;
+          additional_information?: string | null;
+          amount: number;
+          manual_entry?: boolean | null;
+          csv_entry?: boolean | null;
+          auto_sync_entry?: boolean | null;
+          created_by?: string;
+          created_at?: string;
+          updater_id?: string;
+          updated_at?: string;
+        };
+        Update: {
+          id?: string;
+          account_id?: string;
+          transaction_type_id?: number;
+          transaction_category_id?: string | null;
+          transaction_timestamp?: string;
+          transaction_reference?: string | null;
+          additional_information?: string | null;
+          amount?: number;
+          manual_entry?: boolean | null;
+          csv_entry?: boolean | null;
+          auto_sync_entry?: boolean | null;
+          created_by?: string;
+          created_at?: string;
+          updater_id?: string;
+          updated_at?: string;
+        };
+      };
+      account_types: {
         Row: {
           id: number;
-          transaction_type: string;
+          account_type: string;
           active: boolean | null;
           created_by: string;
           created_at: string;
@@ -85,7 +115,7 @@ export interface Database {
         };
         Insert: {
           id?: never;
-          transaction_type: string;
+          account_type: string;
           active?: boolean | null;
           created_by?: string;
           created_at?: string;
@@ -94,7 +124,7 @@ export interface Database {
         };
         Update: {
           id?: never;
-          transaction_type?: string;
+          account_type?: string;
           active?: boolean | null;
           created_by?: string;
           created_at?: string;
@@ -143,56 +173,32 @@ export interface Database {
           updated_at?: string;
         };
       };
-      transactions: {
+      transaction_types: {
         Row: {
-          id: string;
-          account_id: string;
-          transaction_type_id: number;
-          transaction_category_id: string | null;
-          transaction_timestamp: string;
-          transaction_reference: string | null;
-          additional_information: string | null;
-          amount: number;
-          manual_entry: boolean | null;
-          csv_entry: boolean | null;
-          auto_sync_entry: boolean | null;
-          creator_id: string;
+          id: number;
+          transaction_type: string;
+          active: boolean | null;
+          created_by: string;
           created_at: string;
-          updater_id: string;
+          updated_by: string;
           updated_at: string;
         };
         Insert: {
-          id?: string;
-          account_id: string;
-          transaction_type_id: number;
-          transaction_category_id?: string | null;
-          transaction_timestamp?: string;
-          transaction_reference?: string | null;
-          additional_information?: string | null;
-          amount: number;
-          manual_entry?: boolean | null;
-          csv_entry?: boolean | null;
-          auto_sync_entry?: boolean | null;
-          creator_id?: string;
+          id?: never;
+          transaction_type: string;
+          active?: boolean | null;
+          created_by?: string;
           created_at?: string;
-          updater_id?: string;
+          updated_by?: string;
           updated_at?: string;
         };
         Update: {
-          id?: string;
-          account_id?: string;
-          transaction_type_id?: number;
-          transaction_category_id?: string | null;
-          transaction_timestamp?: string;
-          transaction_reference?: string | null;
-          additional_information?: string | null;
-          amount?: number;
-          manual_entry?: boolean | null;
-          csv_entry?: boolean | null;
-          auto_sync_entry?: boolean | null;
-          creator_id?: string;
+          id?: never;
+          transaction_type?: string;
+          active?: boolean | null;
+          created_by?: string;
           created_at?: string;
-          updater_id?: string;
+          updated_by?: string;
           updated_at?: string;
         };
       };
@@ -208,4 +214,3 @@ export interface Database {
     };
   };
 }
-

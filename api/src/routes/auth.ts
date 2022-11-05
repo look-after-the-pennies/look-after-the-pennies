@@ -1,28 +1,26 @@
 import { Router } from 'express';
-import Auth from '../services/auth';
-// import type { AuthRequest } from '../types/http';
+import DB from '../database/index';
+import ErrorHandler from '../services/errors';
 
 const AuthRouter = Router();
 
-// === SIGNUP & LOGIN ====
+//  =============================
+//  ======== POST Login =========
+//  =============================
 
 AuthRouter.post('/login', async function (req, res) {
-  // console.log(req.body);
-
-  const auth = new Auth();
-  const authToken = req.signedCookies['X-LATP-Auth-Token'];
-
-  // Cookies that have been signed
-  // TODO: Fix types not working for extended request object
-  // @ts-ignore
-  // console.log('Auth Cookie: ', authToken);
-
   try {
-    const userDetails = await auth.login(req.body);
-    console.log(userDetails);
-    const session = userDetails.session ? userDetails.session : null;
+    const { data, error } = await DB.auth.signInWithPassword(req.body);
+    if (error) ErrorHandler.dbRequest(error);
+    const session = data.session ? data.session : null;
+
+    if (!session) ErrorHandler.dbRequest('Server error');
 
     if (session) {
+      const expiresAt = session.expires_at
+        ? new Date(session.expires_at * 1000)
+        : undefined;
+
       res.cookie(
         'X-LATP-Auth-Token',
         {
@@ -30,7 +28,7 @@ AuthRouter.post('/login', async function (req, res) {
           refreshToken: session.refresh_token,
         },
         {
-          expires: session.expire_at,
+          expires: expiresAt,
           path: '/',
           httpOnly: true,
           // TODO: Will likely cause problems in production if running on separate subdomain + enable secure
@@ -40,29 +38,26 @@ AuthRouter.post('/login', async function (req, res) {
           signed: true,
         }
       );
+      res.status(200).json({
+        user_id: session.user.id,
+        email: session.user.email,
+        expires_at: session.expires_at,
+      });
     }
-
-    res.status(200).send({
-      user_id: session.user.id,
-      email: session.user.email,
-      expires_at: session.expires_at,
-    });
   } catch (err: any) {
-    console.log(err.message);
-    console.log(err.status);
-
-    console.log(err);
     if (err.status) {
       res.status(err.status).send(err.message);
     } else {
-      console.log('hitting 500 error');
       res.status(500).send('Server error');
     }
   }
 });
 
+//  =============================
+//  ======== POST Logout ========
+//  =============================
+
 AuthRouter.post('/logout', async function (req, res) {
-  // @ts-ignore
   const authToken = req.signedCookies['X-LATP-Auth-Token'];
 
   if (authToken) {
@@ -80,45 +75,38 @@ AuthRouter.post('/logout', async function (req, res) {
   }
 });
 
+//  =============================
+//  ======== POST Signup ========
+//  =============================
+
 AuthRouter.post('/signup', async function (req, res) {
-  console.log(req.body);
-  const authToken = req.signedCookies['X-LATP-Auth-Token'];
-
-  const auth = new Auth();
-
-  // Cookies that have been signed
-  // @ts-ignore
-  console.log('Auth Cookie: ', authToken);
-
   try {
-    const userDetails = await auth.signup(req.body);
+    const { data, error } = await DB.auth.signUp(req.body);
+    if (error) ErrorHandler.dbRequest(error);
+    const session = data.session ? data.session : null;
+    const user = data.user ? data.user : null;
 
-    console.log(userDetails);
-    const session = userDetails.session ? userDetails.session : null;
-
-    if (
-      !session &&
-      userDetails.user.id &&
-      !userDetails.user.email_confirmed_at &&
-      userDetails.user.confirmation_sent_at
-    ) {
-      res
-        .status(201)
-        .send(
-          'Signup successful! Please confirm your email address before logging in.'
-        );
-      return;
+    if (!session || !user) ErrorHandler.dbRequest('Server error');
+    else {
+      if (
+        !session &&
+        user.id &&
+        !user.email_confirmed_at &&
+        user.confirmation_sent_at
+      ) {
+        res
+          .status(201)
+          .send(
+            'Signup successful! Please confirm your email address before logging in.'
+          );
+        return;
+      }
+      res.status(200).send('Success');
     }
-    res.status(200).send('Success');
   } catch (err: any) {
-    console.log(err.message);
-    console.log(err.status);
-
-    console.log(err);
     if (err.status) {
       res.status(err.status).send(err.message);
     } else {
-      console.log('hitting 500 error');
       res.status(500).send('Server error');
     }
   }

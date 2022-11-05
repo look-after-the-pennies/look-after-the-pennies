@@ -1,199 +1,222 @@
 import { Router } from 'express';
-import Transactions from '../services/transactions';
-import setSession from './middleware/set-session';
+import ErrorHandler from '../services/errors';
 
 const TransactionsRouter = Router();
-TransactionsRouter.use(setSession);
 
-// === Get Transactions ====
+//  |||||||||||||||||||||||||||||||||
+//  ========= TRANSACTIONS ==========
+//  |||||||||||||||||||||||||||||||||
+
+//  =================================
+//  ======== GET Transactions =======
+//  =================================
 
 TransactionsRouter.get('/', async function (req, res) {
-  console.log('logging current session from request');
-  console.log(JSON.stringify(req.currentSession));
-  const transactions = new Transactions();
+  const db = req.dbSession.dbClient;
+  try {
+    const { data, error } = await db.from('transactions').select(
+      `id, account_id, transaction_type_id, transaction_category_id, transaction_timestamp, transaction_reference,
+        additional_information, amount, manual_entry, csv_entry, auto_sync_entry, created_by, created_at`
+    );
 
-  transactions
-    .get()
-    .then((accounts: any) => {
-      res.status(200).send(accounts);
-    })
-    .catch((err: any) => {
-      console.log(err);
-      if (err.status) {
-        res.status(err.status).send(err.message);
-      } else {
-        console.log('hitting 500 error');
-        res.status(500).send('Server error');
-      }
-    });
+    if (error) ErrorHandler.dbRequest(error);
+    else res.status(200).json(data);
+  } catch (err: any) {
+    if (err.status) {
+      res.status(err.status).send(err.message);
+    } else {
+      res.status(500).send('Server error');
+    }
+  }
 });
 
-// === Upsert Transaction Type ====
-
-TransactionsRouter.post('/type', async function (req, res) {
-  console.log(JSON.stringify(req.currentSession));
-  console.log(req.body);
-
-  const transactions = new Transactions();
-
-  transactions
-    .upsertTransactionType(req.body)
-    .then((type) => {
-      console.log(JSON.stringify(type));
-      res.status(200).send(type);
-    })
-    .catch((err: any) => {
-      console.log(err.message);
-      console.log(err.status);
-
-      console.log(err);
-      if (err.status) {
-        res.status(err.status).send(err.message);
-      } else {
-        console.log('hitting 500 error');
-        res.status(500).send('Server error');
-      }
-    });
-});
-
-// === Delete Transaction Type ====
-
-TransactionsRouter.delete('/type', async function (req, res) {
-  console.log(JSON.stringify(req.currentSession));
-  console.log(req.body);
-
-  const transactions = new Transactions();
-
-  transactions
-    .deleteTransactionType(req.body)
-    .then((type) => {
-      console.log(JSON.stringify(type));
-      res.status(200).send(type);
-    })
-    .catch((err: any) => {
-      console.log(err.message);
-      console.log(err.status);
-
-      console.log(err);
-      if (err.status) {
-        res.status(err.status).send(err.message);
-      } else {
-        console.log('hitting 500 error');
-        res.status(500).send('Server error');
-      }
-    });
-});
-
-// === Upsert Transaction Category ====
-
-TransactionsRouter.post('/category', async function (req, res) {
-  console.log(JSON.stringify(req.currentSession));
-  console.log(req.body);
-
-  const transactions = new Transactions();
-
-  transactions
-    .upsertTransactionCategory(req.body)
-    .then((category) => {
-      console.log(JSON.stringify(category));
-      res.status(200).send(category);
-    })
-    .catch((err: any) => {
-      console.log(err.message);
-      console.log(err.status);
-
-      console.log(err);
-      if (err.status) {
-        res.status(err.status).send(err.message);
-      } else {
-        console.log('hitting 500 error');
-        res.status(500).send('Server error');
-      }
-    });
-});
-
-// === Delete Transaction Category ====
-
-TransactionsRouter.delete('/category', async function (req, res) {
-  console.log(JSON.stringify(req.currentSession));
-  console.log(req.body);
-
-  const transactions = new Transactions();
-
-  transactions
-    .deleteTransactionCategory(req.body)
-    .then((category) => {
-      console.log(JSON.stringify(category));
-      res.status(200).send(category);
-    })
-    .catch((err: any) => {
-      console.log(err.message);
-      console.log(err.status);
-
-      console.log(err);
-      if (err.status) {
-        res.status(err.status).send(err.message);
-      } else {
-        console.log('hitting 500 error');
-        res.status(500).send('Server error');
-      }
-    });
-});
-
-// === Upsert Transaction ====
+//  ==================================
+//  ======== POST Transaction ========
+//  ==================================
 
 TransactionsRouter.post('/', async function (req, res) {
-  console.log(JSON.stringify(req.currentSession));
-  console.log(req.body);
+  const db = req.dbSession.dbClient;
+  try {
+    const { data, error } = await db.from('transactions').upsert(req.body);
 
-  const transactions = new Transactions();
-
-  transactions
-    .upsertTransaction(req.body)
-    .then((transaction) => {
-      console.log(JSON.stringify(transaction));
-      res.status(200).send(transaction);
-    })
-    .catch((err: any) => {
-      console.log(err.message);
-      console.log(err.status);
-
-      console.log(err);
-      if (err.status) {
-        res.status(err.status).send(err.message);
-      } else {
-        console.log('hitting 500 error');
-        res.status(500).send('Server error');
-      }
-    });
+    if (error) ErrorHandler.dbRequest(error);
+    else res.status(200).json(data);
+  } catch (err: any) {
+    if (err.status) {
+      res.status(err.status).send(err.message);
+    } else {
+      res.status(500).send('Server error');
+    }
+  }
 });
 
-// === Delete Transaction ====
+//  ====================================
+//  ======== DELETE Transaction ========
+//  ====================================
 
 TransactionsRouter.delete('/', async function (req, res) {
-  console.log(JSON.stringify(req.currentSession));
-  console.log(req.body);
+  const db = req.dbSession.dbClient;
 
-  const transactions = new Transactions();
+  try {
+    const { data, error } = await db
+      .from('transactions')
+      .delete()
+      .match({ id: req.body });
 
-  transactions
-    .deleteTransaction(req.body)
-    .then((transaction) => {
-      console.log(JSON.stringify(transaction));
-      res.status(200).send(transaction);
-    })
-    .catch((err: any) => {
-      console.log(err.message);
-      console.log(err.status);
+    if (error) ErrorHandler.dbRequest(error);
+    else res.status(200).json(data);
+  } catch (err: any) {
+    if (err.status) {
+      res.status(err.status).send(err.message);
+    } else {
+      res.status(500).send('Server error');
+    }
+  }
+});
 
-      console.log(err);
-      if (err.status) {
-        res.status(err.status).send(err.message);
-      } else {
-        console.log('hitting 500 error');
-        res.status(500).send('Server error');
-      }
-    });
+//  |||||||||||||||||||||||||||||||||||||||||||
+//  ========= TRANSACTION CATEGORIES ==========
+//  |||||||||||||||||||||||||||||||||||||||||||
+
+//  ===========================================
+//  ======== GET Transaction Categories =======
+//  ===========================================
+
+TransactionsRouter.get('/categories', async function (req, res) {
+  const db = req.dbSession.dbClient;
+  try {
+    const { data, error } = await db
+      .from('transaction_categories')
+      .select(
+        'id, transaction_category, transaction_category_description, icon, default_category, active, created_by'
+      );
+
+    if (error) ErrorHandler.dbRequest(error);
+    else res.status(200).json(data);
+  } catch (err: any) {
+    if (err.status) {
+      res.status(err.status).send(err.message);
+    } else {
+      res.status(500).send('Server error');
+    }
+  }
+});
+
+//  =============================================
+//  ======== POST Transaction Categories ========
+//  =============================================
+
+TransactionsRouter.post('/categories', async function (req, res) {
+  const db = req.dbSession.dbClient;
+  try {
+    const { data, error } = await db
+      .from('transaction_categories')
+      .upsert(req.body);
+
+    if (error) ErrorHandler.dbRequest(error);
+    else res.status(200).json(data);
+  } catch (err: any) {
+    if (err.status) {
+      res.status(err.status).send(err.message);
+    } else {
+      res.status(500).send('Server error');
+    }
+  }
+});
+
+//  ===============================================
+//  ======== DELETE Transaction Categories ========
+//  ===============================================
+
+TransactionsRouter.delete('/categories', async function (req, res) {
+  const db = req.dbSession.dbClient;
+
+  try {
+    const { data, error } = await db
+      .from('transaction_categories')
+      .delete()
+      .match({ id: req.body });
+
+    if (error) ErrorHandler.dbRequest(error);
+    else res.status(200).json(data);
+  } catch (err: any) {
+    if (err.status) {
+      res.status(err.status).send(err.message);
+    } else {
+      res.status(500).send('Server error');
+    }
+  }
+});
+
+//  ||||||||||||||||||||||||||||||||||||||
+//  ========= TRANSACTION TYPES ==========
+//  ||||||||||||||||||||||||||||||||||||||
+
+//  ======================================
+//  ======== GET Transaction Types =======
+//  ======================================
+
+TransactionsRouter.get('/types', async function (req, res) {
+  const db = req.dbSession.dbClient;
+  try {
+    const { data, error } = await db
+      .from('transaction_types')
+      .select('id, transaction_type')
+      .eq('active', true);
+
+    if (error) ErrorHandler.dbRequest(error);
+    else res.status(200).json(data);
+  } catch (err: any) {
+    if (err.status) {
+      res.status(err.status).send(err.message);
+    } else {
+      res.status(500).send('Server error');
+    }
+  }
+});
+
+//  ========================================
+//  ======== POST Transaction Types ========
+//  ========================================
+
+TransactionsRouter.post('/types', async function (req, res) {
+  const db = req.dbSession.dbClient;
+  try {
+    const { data, error } = await db.from('transaction_types').upsert(req.body);
+
+    if (error) ErrorHandler.dbRequest(error);
+    else res.status(200).json(data);
+  } catch (err: any) {
+    if (err.status) {
+      res.status(err.status).send(err.message);
+    } else {
+      res.status(500).send('Server error');
+    }
+  }
+});
+
+//  ==========================================
+//  ======== DELETE Transaction Types ========
+//  ==========================================
+
+TransactionsRouter.delete('/types', async function (req, res) {
+  const db = req.dbSession.dbClient;
+
+  try {
+    const { data, error } = await db
+      .from('transaction_types')
+      .delete()
+      .match({ id: req.body });
+
+    if (error) ErrorHandler.dbRequest(error);
+    else res.status(200).json(data);
+  } catch (err: any) {
+    if (err.status) {
+      res.status(err.status).send(err.message);
+    } else {
+      res.status(500).send('Server error');
+    }
+  }
 });
 
 export default TransactionsRouter;

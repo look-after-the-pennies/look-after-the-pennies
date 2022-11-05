@@ -1,212 +1,146 @@
 import { Router } from 'express';
-import Accounts from '../services/accounts';
-import setSession from './middleware/set-session';
+import ErrorHandler from '../services/errors';
 
 const AccountsRouter = Router();
-AccountsRouter.use(setSession);
 
-// === Get Accounts ====
+//  |||||||||||||||||||||||||||||
+//  ========= ACCOUNTS ==========
+//  |||||||||||||||||||||||||||||
+
+//  =============================
+//  ======== Get Accounts =======
+//  =============================
 
 AccountsRouter.get('/', async function (req, res) {
-  console.log('logging current session from request');
-  console.log(JSON.stringify(req.currentSession));
-  const accounts = new Accounts();
+  const db = req.dbSession.dbClient;
+  try {
+    const { data, error } = await db
+      .from('accounts')
+      .select('id, account_type_id, account_name, logo, created_at');
 
-  accounts
-    .get()
-    .then((accounts: any) => {
-      res.status(200).send(accounts);
-    })
-    .catch((err: any) => {
-      console.log(err);
-      if (err.status) {
-        res.status(err.status).send(err.message);
-      } else {
-        console.log('hitting 500 error');
-        res.status(500).send('Server error');
-      }
-    });
+    if (error) ErrorHandler.dbRequest(error);
+    else res.status(200).json(data);
+  } catch (err: any) {
+    if (err.status) {
+      res.status(err.status).send(err.message);
+    } else {
+      res.status(500).send('Server error');
+    }
+  }
 });
 
-// === Get Account Types ====
-
-AccountsRouter.get('/types', async function (req, res) {
-  // console.log('logging current session from request');
-  // console.log(JSON.stringify(req.currentSession));
-  const accounts = new Accounts();
-
-  accounts
-    .getTypes()
-    .then((accounts: any) => {
-      res.status(200).send(accounts);
-    })
-    .catch((err: any) => {
-      console.log(err);
-      if (err.status) {
-        res.status(err.status).send(err.message);
-      } else {
-        console.log('hitting 500 error');
-        res.status(500).send('Server error');
-      }
-    });
-});
-
-// === Upsert Account Type ====
-
-AccountsRouter.post('/types', async function (req, res) {
-  console.log(JSON.stringify(req.currentSession));
-  console.log(req.body);
-
-  const accounts = new Accounts();
-
-  accounts
-    .upsertType(req.body)
-    .then((res) => {
-      console.log(JSON.stringify(res));
-      res.status(200).send({});
-    })
-    .catch((err: any) => {
-      console.log(err.message);
-      console.log(err.status);
-
-      console.log(err);
-      if (err.status) {
-        res.status(err.status).send(err.message);
-      } else {
-        console.log('hitting 500 error');
-        res.status(500).send('Server error');
-      }
-    });
-});
-
-// === Delete Account Type ====
-
-AccountsRouter.delete('/types', async function (req, res) {
-  console.log(JSON.stringify(req.currentSession));
-  console.log(req.body);
-
-  const accounts = new Accounts();
-
-  accounts
-    .deleteType(req.body)
-    .then((res) => {
-      console.log(JSON.stringify(res));
-      res.status(200).send({});
-    })
-    .catch((err: any) => {
-      console.log(err.message);
-      console.log(err.status);
-
-      console.log(err);
-      if (err.status) {
-        res.status(err.status).send(err.message);
-      } else {
-        console.log('hitting 500 error');
-        res.status(500).send('Server error');
-      }
-    });
-});
-
-// === Upsert Account ====
+//  ================================
+//  ======== Upsert Account ========
+//  ================================
 
 AccountsRouter.post('/', async function (req, res) {
-  console.log('request current session');
-  console.log(JSON.stringify(req.currentSession));
-  // console.log(req.body);
+  const db = req.dbSession.dbClient;
+  try {
+    const { data, error } = await db.from('accounts').upsert(req.body);
 
-  const accounts = new Accounts();
-  console.log('got to post');
-  console.log(req.body);
-  accounts
-    .upsert(
-      req.body,
-      req.currentSession.session.refresh_token,
-      req.currentSession.session.access_token
-    )
-    .then((res) => {
-      console.log('post response body');
-      console.log(JSON.stringify(res));
-      res.status(200).send({});
-    })
-    .catch((err: any) => {
-      // console.log(err.message);
-      // console.log(err.status);
-
-      // console.log(err);
-      if (err.status) {
-        res.status(err.status).send(err.message);
-      } else {
-        console.log('hitting 500 error');
-        res
-          .status(500)
-          .send(err.message ? err.message : err ? err : 'Server error');
-      }
-    });
+    if (error) ErrorHandler.dbRequest(error);
+    else res.status(200).json(data);
+  } catch (err: any) {
+    if (err.status) {
+      res.status(err.status).send(err.message);
+    } else {
+      res.status(500).send('Server error');
+    }
+  }
 });
 
-// === Upsert Test ====
-
-AccountsRouter.post('/test', async function (req, res) {
-  console.log('request current session');
-  console.log(JSON.stringify(req.currentSession));
-  // console.log(req.body);
-
-  const accounts = new Accounts();
-  console.log('got to post');
-  console.log(req.body);
-  accounts
-    .test(
-      req.body,
-      req.currentSession.session.refresh_token,
-      req.currentSession.session.access_token
-    )
-    .then((res) => {
-      console.log('post response body');
-      console.log(JSON.stringify(res));
-      res.status(200).send({});
-    })
-    .catch((err: any) => {
-      // console.log(err.message);
-      // console.log(err.status);
-
-      // console.log(err);
-      if (err.status) {
-        res.status(err.status).send(err.message);
-      } else {
-        console.log('hitting 500 error');
-        res
-          .status(500)
-          .send(err.message ? err.message : err ? err : 'Server error');
-      }
-    });
-});
-
-// === Delete Account Type ====
+//  ================================
+//  ======== Delete Account ========
+//  ================================
 
 AccountsRouter.delete('/', async function (req, res) {
-  console.log(JSON.stringify(req.currentSession));
-  console.log(req.body);
+  const db = req.dbSession.dbClient;
 
-  const accounts = new Accounts();
+  try {
+    const { data, error } = await db
+      .from('accounts')
+      .delete()
+      .match({ id: req.body });
 
-  accounts
-    .delete(req.body)
-    .then((res) => {
-      console.log(JSON.stringify(res));
-      res.status(200).send({});
-    })
-    .catch((err: any) => {
-      console.log(err.message);
-      console.log(err.status);
+    if (error) ErrorHandler.dbRequest(error);
+    else res.status(200).json(data);
+  } catch (err: any) {
+    if (err.status) {
+      res.status(err.status).send(err.message);
+    } else {
+      res.status(500).send('Server error');
+    }
+  }
+});
 
-      console.log(err);
-      if (err.status) {
-        res.status(err.status).send(err.message);
-      } else {
-        console.log('hitting 500 error');
-        res.status(500).send('Server error');
-      }
-    });
+//  ||||||||||||||||||||||||||||||||||
+//  ========= ACCOUNT TYPES ==========
+//  ||||||||||||||||||||||||||||||||||
+
+//  ==================================
+//  ======== Get Account Types =======
+//  ==================================
+
+AccountsRouter.get('/types', async function (req, res) {
+  const db = req.dbSession.dbClient;
+  try {
+    const { data, error } = await db
+      .from('account_types')
+      .select('id, account_type');
+
+    if (error) ErrorHandler.dbRequest(error);
+    else res.status(200).json(data);
+  } catch (err: any) {
+    if (err.status) {
+      res.status(err.status).send(err.message);
+    } else {
+      res.status(500).send('Server error');
+    }
+  }
+});
+
+//  ======================================
+//  ======== Upsert Account Types ========
+//  ======================================
+
+AccountsRouter.post('/types', async function (req, res) {
+  const db = req.dbSession.dbClient;
+  try {
+    const { data, error } = await db.from('account_types').upsert(req.body);
+
+    if (error) ErrorHandler.dbRequest(error);
+    else res.status(200).json(data);
+  } catch (err: any) {
+    if (err.status) {
+      res.status(err.status).send(err.message);
+    } else {
+      res.status(500).send('Server error');
+    }
+  }
+});
+
+//  ======================================
+//  ======== Delete Account Types ========
+//  ======================================
+
+AccountsRouter.delete('/types', async function (req, res) {
+  const db = req.dbSession.dbClient;
+
+  try {
+    const { data, error } = await db
+      .from('account_types')
+      .delete()
+      .match({ id: req.body });
+
+    if (error) ErrorHandler.dbRequest(error);
+    else res.status(200).json(data);
+  } catch (err: any) {
+    if (err.status) {
+      res.status(err.status).send(err.message);
+    } else {
+      res.status(500).send('Server error');
+    }
+  }
 });
 
 export default AccountsRouter;

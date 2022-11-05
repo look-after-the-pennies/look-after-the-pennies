@@ -13,7 +13,7 @@ export interface UserInfo {
   email: string;
   expires_at: number;
   remember_me: boolean;
-  logged_in: boolean;
+  // logged_in: boolean;
 }
 
 export interface AuthResponse {
@@ -22,6 +22,11 @@ export interface AuthResponse {
   pushPage?: string;
 }
 
+export interface AccountsStore {
+  id: number;
+  account_type: string;
+  accounts: Accounts[];
+}
 export interface AccountTypes {
   id: number;
   account_type: string;

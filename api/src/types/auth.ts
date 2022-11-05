@@ -19,3 +19,8 @@ export interface Session {
     expire_at: Date | undefined;
   };
 }
+export interface SessionError {
+  name: string;
+  message: string;
+  status?: number;
+}

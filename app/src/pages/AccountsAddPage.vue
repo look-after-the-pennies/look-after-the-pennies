@@ -35,10 +35,10 @@ const addAccount = async () => {
       date_started: Format.date(dateStarted.value),
     })
     .then((res) => {
-      if (res) {
-        loading.value = false;
-        router.push('/accounts');
-      }
+      // if (res) {
+      loading.value = false;
+      router.push('/accounts');
+      // }
     })
     .catch((err) => {
       console.log('Add account error');

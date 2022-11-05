@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia';
 import type { UserInfo } from '../../types';
-import LocalStorage from '../services/local-storage';
+// import LocalStorage from '../services/local-storage';
 
 // import Http from '../services/http';
 // const apiURL = process.env.API_URL;

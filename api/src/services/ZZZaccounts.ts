@@ -1,15 +1,15 @@
 import DB from '../database/index';
 import type { Account, AccountType } from '../types/db-tables';
-import { Session } from './../types/auth';
+
 import ErrorHandler from './errors';
 // import SessionService from './session';
 // import dbClient from './database';
-import createServerDbClient from './database';
+import { SupabaseClient } from '@supabase/supabase-js';
 
 export default class Accounts {
-  async get(): Promise<any> {
+  async get(db: SupabaseClient): Promise<any> {
     try {
-      const { data, error } = await DB.supabase.from('account_types').select(`
+      const { data, error } = await db.from('account_types').select(`id,
     account_type,
     accounts (
       id, account_type_id, account_name, logo, created_at
@@ -48,54 +48,28 @@ export default class Accounts {
     return data;
   }
 
-  async test(
-    account: Account['Insert'],
-    refreshToken: string,
-    accessToken: string
-  ): Promise<any> {
-    // const sessionService = new SessionService();
+  async test(account: Account['Insert'], db: SupabaseClient): Promise<any> {
     console.log('got to service upsert');
-    console.log(refreshToken);
-    const db = createServerDbClient(accessToken);
-    const u = db.auth.getUser();
-    console.log(u);
-    // @ts-ignore
-    // const { data, error } = await DB.auth.setSession({
-    //   access_token: accessToken,
-    //   refresh_token: refreshToken,
-    // });
-
-    // const u = await DB.auth.getUser();
-    // console.log('Has user set');
-    // console.log(u);
-    // console.log(data);
-    // console.log(error);
-
-    // const { data: d, error: e } = await DB.auth.getSession();
-    // console.log(d);
-    // console.log(e);
 
     const { data: data2, error: error2 } = await db
       .from('accounts')
       //@ts-ignore
       .upsert(account);
+    console.log({ data2 });
     if (error2) ErrorHandler.dbRequest(error2);
-    return data2;
+    const accounts = await this.get(db);
+    return accounts;
   }
 
-  async upsert(
-    account: Account['Insert'],
-    refreshToken: string,
-    accessToken: string
-  ): Promise<any> {
+  async upsert(account: Account['Insert']): Promise<any> {
     // const sessionService = new SessionService();
     console.log('got to service upsert');
-    console.log(refreshToken);
+
     // @ts-ignore
-    const { data, error } = await DB.auth.setSession({
-      access_token: accessToken,
-      refresh_token: refreshToken,
-    });
+    // const { data, error } = await DB.auth.setSession({
+    //   access_token: accessToken,
+    //   refresh_token: refreshToken,
+    // });
 
     const u = await DB.auth.getUser();
     console.log('Has user set');

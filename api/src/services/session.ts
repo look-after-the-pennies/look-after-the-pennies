@@ -1,37 +1,65 @@
-import DB from '../database/index';
-import type { AuthCookie, Session } from '../types/auth';
-import ErrorHandler from './errors';
+import type { AuthCookie, Session, SessionError } from '../types/auth';
 
-export default class Auth {
+import { createClient } from '@supabase/supabase-js';
+import dotEnv from '../config/dotenv';
+import type { Database } from '../types/database';
+
+export default class DBSession {
   authCookie: AuthCookie;
-  userSession: Session | undefined;
+  accessToken: string;
+  refreshToken: string;
+  dbClient?: any;
+  userSession?: Session;
+  resCookie?: any;
+  notAuthorised?: boolean;
+  errorMsg?: SessionError;
 
   constructor(authCookie: AuthCookie) {
     this.authCookie = authCookie;
+    this.accessToken = authCookie.accessToken;
+    this.refreshToken = authCookie.refreshToken;
   }
 
-  async getUser() {
-    console.log('getting user from supabase');
-    const {
-      data: { user },
-    } = await DB.auth.getUser(this.authCookie.accessToken);
-    // console.group('user returned from supabase');
-    // console.log(JSON.stringify(user));
-    return user ? user : await this.setSession();
+  async createDbClient() {
+    const client = createClient<Database>(
+      dotEnv.SUPABASE_URL,
+      dotEnv.SUPABASE_ANON_KEY,
+      {
+        db: {
+          schema: 'public',
+        },
+        auth: {
+          persistSession: true,
+          autoRefreshToken: false,
+        },
+        global: {
+          // @ts-ignore
+          headers: this.accessToken
+            ? {
+                Authorization: `Bearer ${this.accessToken}`,
+              }
+            : null,
+        },
+      }
+    );
+
+    this.dbClient = client;
   }
 
   async setSession() {
-    // console.log('setting session on supabase');
     try {
-      const { data, error } = await DB.auth.setSession(
-        //@ts-ignore
-        this.authCookie.refreshToken
-      );
-      // console.log('user returned from setting supabase session');
-      // console.log(JSON.stringify(data));
-      if (error) throw error;
+      const { data, error } = await this.dbClient.auth.setSession({
+        access_token: this.accessToken,
+        refresh_token: this.refreshToken,
+      });
 
-      if (data.session) {
+      if (error) {
+        this.notAuthorised = true;
+        this.errorMsg = error;
+        return;
+      }
+
+      if (data) {
         // @ts-ignore
         this.userSession = data;
         return;
@@ -39,7 +67,6 @@ export default class Auth {
     } catch (err) {
       console.log('session service error');
       throw err;
-      // @ts-ignore
     }
   }
 }

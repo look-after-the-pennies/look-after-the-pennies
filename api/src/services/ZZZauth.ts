@@ -1,5 +1,5 @@
 import DB from '../database/index';
-import type { AuthCookie, UserDetails } from '../types/auth';
+import type { UserDetails } from '../types/auth';
 import ErrorHandler from './errors';
 
 export default class Auth {

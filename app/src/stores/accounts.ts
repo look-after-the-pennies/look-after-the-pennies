@@ -41,7 +41,7 @@ export const useAccountsStore = defineStore('accounts', {
     },
     async create(account: AddAccount): Promise<AddAccount> {
       const http = new Http();
-      const requestURL = `${apiURL}/accounts/test`;
+      const requestURL = `${apiURL}/accounts`;
       const headers = {
         'Content-Type': 'application/json',
       };
@@ -52,7 +52,11 @@ export const useAccountsStore = defineStore('accounts', {
           if (res.status === 200) {
             console.log('store response');
             console.log(res);
-            return res.data;
+            if (res.data) {
+              this.accountTypes = res.data;
+              return;
+            }
+            // return res.data;
           } else throw new Error(res.message);
         })
         .catch((err) => {
